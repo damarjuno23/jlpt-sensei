@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>だけど (dakedo) - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar">
+            <h1>文法詳細</h1>
+        </header>
+
+        <div class="content">
+            <div class="lesson-header">
+                <div class="grammar-point">だけど</div>
+                <div class="reading">dakedo</div>
+                <div class="meaning">namun; tetapi</div>
+                <div style="margin-top: 0.5rem; color: #95a5a6;">Halaman 42</div>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📝 Cara Penggunaan</h3>
+                <div class="usage-box">
+                    <p><strong>Klausa 1</strong> + <strong>だけど</strong> + <strong>Klausa 2</strong></p>
+                </div>
+                <p style="margin-top: 1rem;">Pelajari tata bahasa Jepang: <strong>だけど (dakedo)</strong>. Arti: <strong>namun; tetapi</strong>.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📖 Contoh Kalimat</h3>
+
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">1</span>
+                            彼女はかわいい<strong>だけど</strong>僕のタイプではない。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">かのじょは かわいい<strong>だけど</strong> ぼくの タイプではない。</div>
+                        <div class="romaji-text row-romaji">Kanojo wa kawaii <strong>dakedo</strong> boku no taipu dewa nai.</div>
+                        <div class="id-text row-arti">Dia cantik, tapi bukan tipeku.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">2</span>
+                            野菜は好きじゃない<strong>だけど</strong>体にいいから食べる。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">やさいは すきじゃない<strong>だけど</strong> からだに いいから たべる。</div>
+                        <div class="romaji-text row-romaji">Yasai wa suki janai <strong>dakedo</strong> karada ni ii kara taberu.</div>
+                        <div class="id-text row-arti">Aku tidak suka sayuran, tapi aku memakannya karena baik untuk tubuh.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">3</span>
+                            宿題をしたん<strong>だけど</strong>、学校に持ってくるのを忘れました。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">しゅくだいを したん<strong>だけど</strong>、がっこうに もってくるのを わすれました。</div>
+                        <div class="romaji-text row-romaji">Shukudai o shitan <strong>dakedo</strong>, gakkou ni motte iku no wo wasure mashita.</div>
+                        <div class="id-text row-arti">Aku sudah mengerjakan PR, tapi aku lupa membawanya ke sekolah.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">4</span>
+                            このケーキは美味しそう<strong>だけど</strong>お腹一杯だからいらない。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">この ケーキは おいしそう<strong>だけど</strong> おなか いっぱいだから いらない。</div>
+                        <div class="romaji-text row-romaji">Kono keeki wa oishisou <strong>dakedo</strong> onaka ippai dakara iranai.</div>
+                        <div class="id-text row-arti">Kue ini kelihatannya enak, tapi aku sudah kenyang jadi tidak mau.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">5</span>
+                            風邪ひいちゃった。早く良くなるといいん<strong>だけど</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">かぜ ひいちゃった。はやく よくなると いいん<strong>だけど</strong>。</div>
+                        <div class="romaji-text row-romaji">Kaze hiichatta. Hayaku yokunaru to ii n <strong>dakedo</strong>.</div>
+                        <div class="id-text row-arti">Aku masuk angin. Semoga cepat sembuh.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">6</span>
+                            私は日本語をもっと勉強したい<strong>だけど</strong>仕事で忙しいからあまり時間がない。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">わたしは にほんごを もっと べんきょうしたい<strong>だけど</strong> しごとで いそがしいから あまり じかんがない。</div>
+                        <div class="romaji-text row-romaji">Watashi wa nihongo o motto benkyou shitai <strong>dakedo</strong> shigoto de isogashii kara amari jikan ga nai.</div>
+                        <div class="id-text row-arti">Aku ingin belajar bahasa Jepang lebih banyak, tapi sibuk kerja jadi tidak punya banyak waktu.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">7</span>
+                            若いころはゲームセンターによく行ったもの<strong>だけど</strong>、最近は行かなくなった。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">わかい ころは ゲームセンターに よく いったもの<strong>だけど</strong>、さいきんは いかなくなった。</div>
+                        <div class="romaji-text row-romaji">Wakai koro wa geemu sentaa ni yoku itta mono <strong>dakedo</strong>, saikin wa ikanaku natta.</div>
+                        <div class="id-text row-arti">Waktu muda aku sering pergi ke arcade, tapi akhir-akhir ini aku sudah tidak pergi.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">8</span>
+                            私は昔から虫が嫌い<strong>だけど</strong>、この虫は大丈夫です。あまり怖くない。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">わたしは むかしから むしが きらい<strong>だけど</strong>、この むしは だいじょうぶです。あまり こわくない。</div>
+                        <div class="romaji-text row-romaji">Watashi wa mukashi kara mushi ga kirai <strong>dakedo</strong>, kono mushi wa daijoubu desu. Amari kowakunai.</div>
+                        <div class="id-text row-arti">Sejak dulu aku benci serangga, tapi aku tidak apa-apa dengan serangga ini. Tidak terlalu menakutkan.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">9</span>
+                            私はお酒が強いん<strong>だけど</strong>、昨日は酔っ払ってしまいました。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">わたしは おさけが つよいん<strong>だけど</strong>、きのうは よっぱらって しまいました。</div>
+                        <div class="romaji-text row-romaji">Watashi wa osake ga tsuyoin <strong>dakedo</strong>, kinou wa yopparatte shimai mashita.</div>
+                        <div class="id-text row-arti">Aku punya toleransi alkohol yang kuat, tapi kemarin aku mabuk.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="17.html" class="nav-button">← Prev</a>
+                <a href="../quiz/quiz.html?lesson=18" class="nav-button">📝 Quiz</a>
+                <a href="19.html" class="nav-button">Next →</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

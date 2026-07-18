@@ -1,0 +1,132 @@
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background: #2c3e50;
+    color: white;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    background: #1a252f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.sidebar-header h2 {
+    font-size: 1.2rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: none;
+}
+
+.sidebar-search {
+    padding: 1rem;
+    position: sticky;
+    top: 70px;
+    background: #2c3e50;
+    z-index: 9;
+}
+
+.sidebar-search input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    outline: none;
+}
+
+.sidebar-search input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.sidebar-search input:focus {
+    background: rgba(255,255,255,0.2);
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-section {
+    padding: 1rem 1.5rem 0.5rem;
+    font-size: 0.75rem;
+    color: #95a5a6;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.nav-link {
+    display: block;
+    padding: 0.7rem 1.5rem;
+    color: #bdc3c7;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.nav-link:hover {
+    background: rgba(255,255,255,0.05);
+    color: white;
+    border-left-color: #3498db;
+}
+
+.nav-link.active {
+    background: rgba(52, 152, 219, 0.2);
+    color: white;
+    border-left-color: #3498db;
+}
+
+.nav-link .grammar-number {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .close-btn {
+        display: block;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+    }
+    
+    .menu-btn {
+        display: block;
+    }
+}
+
+/* Hide grammar items when searching */
+.nav-link.hidden {
+    display: none;
+}

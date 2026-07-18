@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ばいい (ba ii) - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar">
+            <h1>文法詳細</h1>
+        </header>
+
+        <div class="content">
+            <div class="lesson-header">
+                <div class="grammar-point">ばいい</div>
+                <div class="reading">ba ii</div>
+                <div class="meaning">sebaiknya, bisa, akan baik jika</div>
+                <div style="margin-top: 0.5rem; color: #95a5a6;">Halaman 16</div>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📝 Cara Penggunaan</h3>
+                <div class="usage-box">
+                    <p><strong>Kata Kerja (bentuk ば kondisional)</strong> + <strong>いい</strong></p>
+                </div>
+                <p style="margin-top: 1rem;">Pelajari tata bahasa Jepang: <strong>ばいい (ba ii)</strong>. Arti: <strong>sebaiknya, bisa, akan baik jika</strong>.</p>
+                <p>Tata bahasa ini harus menggunakan kata kerja dalam bentuk <strong>ば (ba)</strong> kondisional.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📖 Contoh Kalimat</h3>
+
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">1</span>
+                            どうすれ<strong>ばいい</strong>ですか?
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">どうすれ<strong>ばいい</strong>ですか?</div>
+                        <div class="romaji-text row-romaji">Dou sure<strong>ba ii</strong> desu ka.</div>
+                        <div class="id-text row-arti">Apa yang sebaiknya saya lakukan?</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">2</span>
+                            どこに行け<strong>ばいい</strong>ですか?
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">どこに いけ<strong>ばいい</strong>ですか?</div>
+                        <div class="romaji-text row-romaji">Doko ni ike<strong>ba ii</strong> desu ka.</div>
+                        <div class="id-text row-arti">Ke mana sebaiknya saya pergi?</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">3</span>
+                            私は何を言え<strong>ばいい</strong>かわからない。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">わたしは なにを いえ<strong>ばいい</strong>か わからない。</div>
+                        <div class="romaji-text row-romaji">Watashi wa nani o ie<strong>ba ii</strong> ka wakaranai.</div>
+                        <div class="id-text row-arti">Saya tidak yakin apa yang harus saya katakan.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">4</span>
+                            何を歌え<strong>ばいい</strong>ですか。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">なにを うたえ<strong>ばいい</strong>ですか。</div>
+                        <div class="romaji-text row-romaji">Nani o utae<strong>ba ii</strong> desu ka.</div>
+                        <div class="id-text row-arti">Apa yang sebaiknya saya nyanyikan?</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">5</span>
+                            君が決めれ<strong>ばいい</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">きみが きめれ<strong>ばいい</strong>。</div>
+                        <div class="romaji-text row-romaji">Kimi ga kimere<strong>ba ii</strong>.</div>
+                        <div class="id-text row-arti">Terserah kamu untuk memutuskannya.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">6</span>
+                            もう少し雨が降れ<strong>ばいい</strong>な。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">もうすこし あめが ふれ<strong>ばいい</strong>な。</div>
+                        <div class="romaji-text row-romaji">Mou sukoshi ame ga fure<strong>ba ii</strong> na.</div>
+                        <div class="id-text row-arti">Akan bagus jika hujan sedikit lagi.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">7</span>
+                            どちらの方向へ進め<strong>ばいい</strong>のか?
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">どちらの ほうこうへ すすめ<strong>ばいい</strong>のか?</div>
+                        <div class="romaji-text row-romaji">Dochira no houkou e susume<strong>ba yoi</strong> no ka.</div>
+                        <div class="id-text row-arti">Ke arah mana sebaiknya saya pergi?</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">8</span>
+                            新宿駅に行きたいんですが、どうやって行け<strong>ばいい</strong>ですか?
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">しんじゅくえきに いきたいんですが、どうやって いけ<strong>ばいい</strong>ですか?</div>
+                        <div class="romaji-text row-romaji">Shinjuku eki ni ikitain desu ga, dou yatte ike<strong>ba ii</strong> desu ka.</div>
+                        <div class="id-text row-arti">Saya ingin pergi ke stasiun Shinjuku, bagaimana cara ke sana?</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="4.html" class="nav-button">← Prev</a>
+                <a href="6.html" class="nav-button">Next →</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

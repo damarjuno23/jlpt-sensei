@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Quiz - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <style>
+        .quiz-container { max-width: 700px; margin: 0 auto; }
+        .quiz-question {
+            background: white; border-radius: 12px; padding: 1.5rem;
+            margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .quiz-question .q-number { font-weight: bold; color: #2c3e50; margin-bottom: 0.8rem; }
+        .quiz-question .q-sentence {
+            font-size: 1.3rem; margin-bottom: 1rem; padding: 1rem;
+            background: #f8f9fa; border-radius: 8px; line-height: 1.8;
+        }
+        .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+        .quiz-option {
+            padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px;
+            cursor: pointer; text-align: center; font-size: 1.1rem; transition: all 0.2s;
+        }
+        .quiz-option:hover { border-color: #3498db; background: #f0f7ff; }
+        .quiz-option.correct { border-color: #27ae60; background: #d5f5e3; pointer-events: none; }
+        .quiz-option.wrong { border-color: #e74c3c; background: #fadbd8; pointer-events: none; }
+        .quiz-score { text-align: center; font-size: 1.5rem; font-weight: bold; padding: 1.5rem; }
+        .quiz-score.perfect { color: #27ae60; } .quiz-score.good { color: #3498db; } .quiz-score.ok { color: #f39c12; }
+        .btn-retry {
+            display: block; margin: 1rem auto; padding: 0.8rem 2rem;
+            background: #2c3e50; color: white; border: none; border-radius: 25px;
+            font-size: 1rem; cursor: pointer;
+        }
+        .btn-back { background: #95a5a6; text-decoration: none; display: inline-block; text-align: center; }
+        .quiz-empty { text-align: center; padding: 3rem; color: #95a5a6; font-size: 1.2rem; }
+    </style>
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar">
+            <h1>Grammar Quiz</h1>
+        </header>
+
+        <div class="content">
+            <div class="quiz-container" id="quizContainer"></div>
+        </div>
+    </div>
+
+    <script src="quiz-data.js"></script>
+    <script src="quiz-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    background: #95967e;
+    color: black;
+    display: flex;
+}
+
+/* Top Bar */
+.top-bar {
+    background: #2c3e50;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+}
+
+.menu-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.top-bar h1 {
+    font-size: 1.3rem;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 300px;
+    min-height: 100vh;
+}
+
+.content {
+    padding: 1rem;
+    max-width: 100%;
+}
+
+/* Grammar Grid */
+.grammar-card {
+    background: #f0b01f;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: all 0.3s;
+    border-left: 2px solid white;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.grammar-card .jp {
+    font-size: 1rem;
+    color: #2c3e50;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+}
+
+.grammar-card .romaji {
+    font-size: 0.9rem;
+    color: #880808;
+    margin-bottom: 0.2rem;
+}
+
+.grammar-card .meaning {
+    font-size: 0.9rem;
+    color: black;
+}
+
+.grammar-card .number {
+    font-size: 0.9rem;
+    color: black;
+    margin-bottom: 0.3rem;
+}
+
+.grammar-card .page {
+    font-size: 0.8rem;
+    color: white;
+    margin-top: 0.5rem;
+    text-align: right;
+}
+
+/* .grammar-card:hover {
+    transform: translateX(-4px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+} */
+
+.grammar-card:hover {
+    transform: scale(1.1);
+    z-index: 10;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+
+.grammar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.72rem;
+}
+
+/* Lesson Page */
+.lesson-header {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.lesson-header .grammar-point {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.lesson-header .reading {
+    font-size: 1rem;
+    color: #3498db;
+    margin-bottom: 0.5rem;
+}
+
+.lesson-header .meaning {
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+
+.lesson-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.lesson-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #3498db;
+}
+
+/* Navigation */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.nav-button {
+    padding: 0.8rem 1.5rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.nav-button:hover {
+    background: #2980b9;
+}
+
+.nav-button.home {
+    background: #95a5a6;
+}
+
+.nav-button.home:hover {
+    background: #7f8c8d;
+}
+
+/* Usage Box */
+.usage-box {
+    background: #f0f4ff;
+    padding: 1.2rem;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+}
+
+.usage-box p {
+    margin: 0.3rem 0;
+}
+
+/* Example List */
+.example-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.example-item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    background: white;
+}
+
+.example-item .jp-text {
+    background: #2e4759;
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.example-item .jp-text .example-number {
+    background: rgba(255,255,255,0.2);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.example-item .kana-text {
+    background: #b2ebf2;
+    color: black;
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    display: none;
+}
+
+.example-item .romaji-text {
+    background: #d7d7d7;
+    color: #384653;
+    font-size: 0.9rem;
+    font-style: italic;
+    padding: 8px 14px;
+    display: none;
+}
+
+.example-item .id-text {
+    background: #f1e6a8;
+    color: #2c3e50;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-left: 3px solid #8fd4c4;
+    padding: 8px 14px;
+    display: none;
+}
+
+.example-item .kana-text.show,
+.example-item .romaji-text.show,
+.example-item .id-text.show {
+    display: block;
+}
+
+/* Toggle Buttons */
+.example-toggles {
+    display: flex;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #f8f8f8;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.example-toggles .toggle-btn {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    margin-bottom: 0;
+}
+
+.toggle-btn {
+    background: #FF7F50;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: all 0.2s;
+    color: white;
+}
+
+.toggle-btn:hover {
+    background: #dd7049;
+}
+
+.toggle-btn.active {
+    background: #198368;
+    color: white;
+}
+
+/* Floating Menu Button */
+.floating-menu-btn {
+    display: none;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    font-size: 1.3rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.welcome-section {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .floating-menu-btn {
+        display: block;
+    }
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ばよかった (ba yokatta) - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar">
+            <h1>文法詳細</h1>
+        </header>
+
+        <div class="content">
+            <div class="lesson-header">
+                <div class="grammar-point">ばよかった</div>
+                <div class="reading">ba yokatta</div>
+                <div class="meaning">seharusnya; akan lebih baik jika-</div>
+                <div style="margin-top: 0.5rem; color: #95a5a6;">Halaman 18</div>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📝 Cara Penggunaan</h3>
+                <div class="usage-box">
+                    <p><strong>Kata Kerja (bentuk ば kondisional)</strong> + <strong>よかった（のに）</strong></p>
+                </div>
+                <p style="margin-top: 1rem;">Pelajari tata bahasa Jepang: <strong>ばよかった (ba yokatta)</strong>. Arti: <strong>seharusnya; akan lebih baik jika-</strong>.</p>
+                <p>Dapat menambahkan <strong>のに (no ni)</strong> di akhir untuk penekanan menjadi <strong>ばよかったのに (ba yokatta no ni)</strong>.</p>
+                <p>Tata bahasa ini harus menggunakan kata kerja dalam bentuk <strong>ば (ba)</strong> kondisional.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📖 Contoh Kalimat</h3>
+
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">1</span>
+                            そうすれ<strong>ばよかった</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">そうすれ<strong>ばよかった</strong>。</div>
+                        <div class="romaji-text row-romaji">Sou sure<strong>ba yokatta</strong>.</div>
+                        <div class="id-text row-arti">Seharusnya saya melakukan itu.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">2</span>
+                            傘を持ってくれ<strong>ばよかった</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">かさを もってくれ<strong>ばよかった</strong>。</div>
+                        <div class="romaji-text row-romaji">Kasa o motte kure<strong>ba yokatta</strong>.</div>
+                        <div class="id-text row-arti">Seharusnya saya membawa payung.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">3</span>
+                            遅刻してしまった。もっと早く家を出れ<strong>ばよかった</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">ちこくして しまった。もっと はやく いえを でれ<strong>ばよかった</strong>。</div>
+                        <div class="romaji-text row-romaji">Chikoku shite shimatta. Motto hayaku ie o dere<strong>ba yokatta</strong>.</div>
+                        <div class="id-text row-arti">Saya terlambat. Seharusnya saya berangkat dari rumah lebih awal.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">4</span>
+                            早く連絡してくれれ<strong>ばよかったのに</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">はやく れんらく してくれれ<strong>ばよかったのに</strong>。</div>
+                        <div class="romaji-text row-romaji">Hayaku renraku shite kurere<strong>ba yokatta noni</strong>.</div>
+                        <div class="id-text row-arti">Seharusnya kamu menghubungi saya lebih awal.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">5</span>
+                            友人にあんなことを言わなけれ<strong>ばよかった</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">ゆうじんに あんなことを いわなけれ<strong>ばよかった</strong>。</div>
+                        <div class="romaji-text row-romaji">Yuujin ni anna koto o iwanakere<strong>ba yokatta</strong>.</div>
+                        <div class="id-text row-arti">Andai saja saya tidak mengatakan hal itu pada teman saya.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">6</span>
+                            夕べの番組は面白かった。あなたも見れ<strong>ばよかったのに</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">ゆうべの ばんぐみは おもしろかった。あなたも みれ<strong>ばよかったのに</strong>。</div>
+                        <div class="romaji-text row-romaji">Yuube no bangumi wa omoshirokatta. Anata mo mire<strong>ba yokatta noni</strong>.</div>
+                        <div class="id-text row-arti">Acara tadi malam menarik. Seharusnya kamu menontonnya!</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">7</span>
+                            こんなことを言わなけれ<strong>ばよかった</strong>。今は後悔している。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">こんなことを いわなけれ<strong>ばよかった</strong>。いまは こうかい している。</div>
+                        <div class="romaji-text row-romaji">Konna koto o iwanakere<strong>ba yokatta</strong>. Ima wa koukai shite iru.</div>
+                        <div class="id-text row-arti">Andai saja saya tidak mengatakan ini. Sekarang saya benar-benar menyesal.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">8</span>
+                            新しいパソコンを買わないで、私のを使え<strong>ばよかったのに</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">あたらしい パソコンを かわないで、わたしのを つかえ<strong>ばよかったのに</strong>。</div>
+                        <div class="romaji-text row-romaji">Atarashii pasokon o kawanaide, watashi no o tsukae<strong>ba yokatta noni</strong>.</div>
+                        <div class="id-text row-arti">Seharusnya kamu tidak membeli komputer baru dan pakai punyaku saja.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="5.html" class="nav-button">← Prev</a>
+                <a href="7.html" class="nav-button">Next →</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

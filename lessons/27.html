@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ごとに (goto ni) - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar">
+            <h1>文法詳細</h1>
+        </header>
+
+        <div class="content">
+            <div class="lesson-header">
+                <div class="grammar-point">ごとに</div>
+                <div class="reading">goto ni</div>
+                <div class="meaning">setiap; tiap; dengan interval</div>
+                <div style="margin-top: 0.5rem; color: #95a5a6;">Halaman 60</div>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📝 Cara Penggunaan</h3>
+                <div class="usage-box">
+                    <p><strong>Kata Kerja (bentuk kamus)</strong> + <strong>ごとに</strong></p>
+                    <p><strong>Kata Benda</strong> + <strong>ごとに</strong></p>
+                </div>
+                <p style="margin-top: 1rem;">Pelajari tata bahasa Jepang: <strong>ごとに (goto ni)</strong>. Arti: <strong>setiap; tiap; dengan interval</strong>.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📖 Contoh Kalimat</h3>
+
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">1</span>
+                            バスは10分<strong>ごとに</strong>通っている。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">バスは 10ぷん<strong>ごとに</strong> かよっている。</div>
+                        <div class="romaji-text row-romaji">Basu wa 10 pun <strong>goto ni</strong> kayotteiru.</div>
+                        <div class="id-text row-arti">Bus berjalan setiap 10 menit.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">2</span>
+                            オリンピックは4年<strong>ごとに</strong>開催される。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">オリンピックは 4ねん<strong>ごとに</strong> かいさいされる。</div>
+                        <div class="romaji-text row-romaji">Orinpikku wa yon nen <strong>goto ni</strong> kaisai sareru.</div>
+                        <div class="id-text row-arti">Olimpiade diadakan setiap 4 tahun.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">3</span>
+                            彼は6か月<strong>ごとに</strong>新作の小説を出している。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">かれは 6かげつ<strong>ごとに</strong> しんさくの しょうせつを だしている。</div>
+                        <div class="romaji-text row-romaji">Kare wa 6 ka getsu <strong>goto ni</strong> shinsaku no shousetsu o dashiteiru.</div>
+                        <div class="id-text row-arti">Dia mengeluarkan novel pendek baru setiap 6 bulan.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">4</span>
+                            このフェリーは30分<strong>ごとに</strong>通っている。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">この フェリーは 30ぷん<strong>ごとに</strong> かよっている。</div>
+                        <div class="romaji-text row-romaji">Kono ferii wa 30 pun <strong>goto ni</strong> kayotteiru.</div>
+                        <div class="id-text row-arti">Feri ini berjalan setiap 30 menit.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">5</span>
+                            彼は土曜<strong>ごとに</strong>恋人に会っている。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">かれは どよう<strong>ごとに</strong> こいびとに あっている。</div>
+                        <div class="romaji-text row-romaji">Kare wa doyou <strong>goto ni</strong> koibito ni atteiru.</div>
+                        <div class="id-text row-arti">Dia bertemu pacarnya setiap hari Sabtu.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">6</span>
+                            日<strong>ごとに</strong>暖かくなっている。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">ひ<strong>ごとに</strong> あたたかくなっている。</div>
+                        <div class="romaji-text row-romaji">Hi <strong>goto ni</strong> atatakaku natteiru.</div>
+                        <div class="id-text row-arti">Semakin hari semakin hangat.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">7</span>
+                            このシステムは半年<strong>ごとに</strong>アップデートされる。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">この システムは はんとし<strong>ごとに</strong> アップデートされる。</div>
+                        <div class="romaji-text row-romaji">Kono shisutemu wa hantoshi <strong>goto ni</strong> appudeeto sareru.</div>
+                        <div class="id-text row-arti">Sistem ini diperbarui setiap setengah tahun.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">8</span>
+                            地球は24時間<strong>ごとに</strong>1回自転する。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">ちきゅうは 24じかん<strong>ごとに</strong> 1かい じてんする。</div>
+                        <div class="romaji-text row-romaji">Chikyuu wa 24 jikan <strong>goto ni</strong> ikkai jiten suru.</div>
+                        <div class="id-text row-arti">Bumi berotasi sekali setiap 24 jam.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="26.html" class="nav-button">← Prev</a>
+                <a href="../quiz/quiz.html?lesson=27" class="nav-button">📝 Quiz</a>
+                <a href="28.html" class="nav-button">Next →</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

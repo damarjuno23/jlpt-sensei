@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代わりに (kawari ni) - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar">
+            <h1>文法詳細</h1>
+        </header>
+
+        <div class="content">
+            <div class="lesson-header">
+                <div class="grammar-point">代わりに</div>
+                <div class="reading">かわりに (kawari ni)</div>
+                <div class="meaning">sebagai ganti; sebagai imbalan-</div>
+                <div style="margin-top: 0.5rem; color: #95a5a6;">Halaman 82</div>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📝 Cara Penggunaan</h3>
+                <div class="usage-box">
+                    <p><strong>Kata Kerja (casual)</strong> + <strong>代わりに</strong></p>
+                    <p><strong>Kata Benda + の</strong> + <strong>代わりに</strong></p>
+                </div>
+                <p style="margin-top: 1rem;">Pelajari tata bahasa Jepang: <strong>代わりに【かわりに】(kawari ni)</strong>. Arti: <strong>sebagai ganti; sebagai pengganti; sebagai imbalan</strong>.</p>
+                <p>Dua penggunaan utama:</p>
+                <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                    <li>sebagai ganti; menggantikan</li>
+                    <li>sebagai imbalan; sebagai ganti rugi</li>
+                </ol>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📖 Contoh Kalimat</h3>
+
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">1</span>
+                            私が部長の<strong>代わりに</strong>出張に行きます。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">わたしが ぶちょうの<strong>かわりに</strong> しゅっちょうに いきます。</div>
+                        <div class="romaji-text row-romaji">Watashi ga buchou no <strong>kawari ni</strong> shucchou ni ikimasu.</div>
+                        <div class="id-text row-arti">Aku akan pergi dinas atas nama manajer.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">2</span>
+                            今朝はコーヒーの<strong>代わりに</strong>お茶を飲んだ。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">けさは コーヒーの<strong>かわりに</strong> おちゃを のんだ。</div>
+                        <div class="romaji-text row-romaji">Kesa wa koohii no <strong>kawari ni</strong> ocha o nonda.</div>
+                        <div class="id-text row-arti">Pagi ini, aku minum teh sebagai ganti kopi.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">3</span>
+                            昨日残業した<strong>代わりに</strong>、今日は少し早く帰っていいと言われた。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">きのう ざんぎょうした<strong>かわりに</strong>、きょうは すこし はやく かえっていいと いわれた。</div>
+                        <div class="romaji-text row-romaji">Kinou zangyou shita <strong>kawari ni</strong>, kyou wa sukoshi hayaku kaette ii to iwareta.</div>
+                        <div class="id-text row-arti">Sebagai ganti lembur kemarin, aku diberitahu boleh pulang lebih awal hari ini.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">4</span>
+                            今日は仕事へ車で行く<strong>代わりに</strong>自転車で行った。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">きょうは しごとへ くるまで いく<strong>かわりに</strong> じてんしゃで いった。</div>
+                        <div class="romaji-text row-romaji">Kyou wa shigoto e kuruma de iku <strong>kawari ni</strong> jitensha de itta.</div>
+                        <div class="id-text row-arti">Hari ini, daripada pergi kerja dengan mobil, aku pergi dengan sepeda.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">5</span>
+                            お箸がないので、その<strong>代わりに</strong>フォークを使う。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">おはしが ないので、その<strong>かわりに</strong> フォークを つかう。</div>
+                        <div class="romaji-text row-romaji">Ohashi ga nai no de, sono <strong>kawari ni</strong> fooku o tsukau.</div>
+                        <div class="id-text row-arti">Karena tidak ada sumpit, aku akan pakai garpu saja.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">6</span>
+                            車で来たので、ビールの<strong>代わりに</strong>コーラをください。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">くるまで きたので、ビールの<strong>かわりに</strong> コーラを ください。</div>
+                        <div class="romaji-text row-romaji">Kuruma de kita no de, biiru no <strong>kawari ni</strong> koora o kudasai.</div>
+                        <div class="id-text row-arti">Karena aku datang dengan mobil, aku minta kola saja daripada bir.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">7</span>
+                            仕事は毎日とても忙しい<strong>代わりに</strong>、給料がいい。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">しごとは まいにち とても いそがしい<strong>かわりに</strong>、きゅうりょうが いい。</div>
+                        <div class="romaji-text row-romaji">Shigoto wa mainichi totemo isogashii <strong>kawari ni</strong>, kyuuryou ga ii.</div>
+                        <div class="id-text row-arti">Pekerjaanku sangat sibuk setiap hari, tapi sebagai imbalannya gajinya bagus.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">8</span>
+                            最近は、メールの<strong>代わりに</strong>LINEで連絡をとる人が増えている。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">さいきんは、メールの<strong>かわりに</strong> LINEで れんらくを とる ひとが ふえている。</div>
+                        <div class="romaji-text row-romaji">Saikin wa, meeru no <strong>kawari ni</strong> LINE de renraku o toru hito ga fueteiru.</div>
+                        <div class="id-text row-arti">Belakangan ini, semakin banyak orang menggunakan LINE sebagai ganti email untuk menghubungi.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="37.html" class="nav-button">← Prev</a>
+                <a href="../quiz/quiz.html?lesson=38" class="nav-button">📝 Quiz</a>
+                <a href="39.html" class="nav-button">Next →</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

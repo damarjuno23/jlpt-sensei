@@ -3,35 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grammar Quiz - N3 文法</title>
+    <title>Multiple Choice Quiz - N3 文法</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <style>
         .quiz-container { max-width: 700px; margin: 0 auto; }
-        .quiz-question {
-            background: white; border-radius: 12px; padding: 1.5rem;
-            margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-        .quiz-question .q-number { font-weight: bold; color: #2c3e50; margin-bottom: 0.8rem; }
-        .quiz-question .q-sentence {
-            font-size: 1.3rem; margin-bottom: 1rem; padding: 1rem;
-            background: #f8f9fa; border-radius: 8px; line-height: 1.8;
-        }
+        .quiz-question { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .q-number { font-weight: bold; color: #2c3e50; margin-bottom: 0.8rem; }
+        .q-sentence { font-size: 1.3rem; margin-bottom: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; line-height: 1.8; }
         .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-        .quiz-option {
-            padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px;
-            cursor: pointer; text-align: center; font-size: 1.1rem; transition: all 0.2s;
-        }
+        .quiz-option { padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; text-align: center; font-size: 1.1rem; transition: all 0.2s; }
         .quiz-option:hover { border-color: #3498db; background: #f0f7ff; }
         .quiz-option.correct { border-color: #27ae60; background: #d5f5e3; pointer-events: none; }
         .quiz-option.wrong { border-color: #e74c3c; background: #fadbd8; pointer-events: none; }
         .quiz-score { text-align: center; font-size: 1.5rem; font-weight: bold; padding: 1.5rem; }
         .quiz-score.perfect { color: #27ae60; } .quiz-score.good { color: #3498db; } .quiz-score.ok { color: #f39c12; }
-        .btn-retry {
-            display: block; margin: 1rem auto; padding: 0.8rem 2rem;
-            background: #2c3e50; color: white; border: none; border-radius: 25px;
-            font-size: 1rem; cursor: pointer;
-        }
+        .btn-retry { display: block; margin: 1rem auto; padding: 0.8rem 2rem; background: #2c3e50; color: white; border: none; border-radius: 25px; font-size: 1rem; cursor: pointer; }
         .btn-back { background: #95a5a6; text-decoration: none; display: inline-block; text-align: center; }
         .quiz-empty { text-align: center; padding: 3rem; color: #95a5a6; font-size: 1.2rem; }
     </style>
@@ -39,16 +26,64 @@
 </head>
 <body>
     <div class="main-content">
-        <header class="top-bar">
-            <h1>Grammar Quiz</h1>
-        </header>
-
-        <div class="content">
-            <div class="quiz-container" id="quizContainer"></div>
-        </div>
+        <header class="top-bar"><h1>Multiple Choice Quiz</h1></header>
+        <div class="content"><div class="quiz-container" id="quizContainer"></div></div>
     </div>
 
-    <script src="quiz-data.js"></script>
-    <script src="quiz-engine.js"></script>
+    <script src="quiz-mc-data.js"></script>
+    <script>
+        let currentQuestions=[], ci=0, score=0, answered=false, currentLessonId=null;
+
+        function getParam(p){ return new URL(window.location.href).searchParams.get(p); }
+
+        function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+        function startQuiz(){
+            currentLessonId=getParam('lesson');
+            let filtered=[];
+            if(currentLessonId && allMCData[currentLessonId]){
+                filtered=allMCData[currentLessonId];
+            } else {
+                for(let k in allMCData){ filtered=filtered.concat(allMCData[k]); }
+                filtered=shuffle(filtered).slice(0,10);
+            }
+            if(filtered.length===0){
+                document.getElementById('quizContainer').innerHTML=`<div class="quiz-empty"><p>📝 Belum ada soal.</p><a href="../index.html" class="btn-retry btn-back">← Home</a></div>`;
+                return;
+            }
+            currentQuestions=shuffle(filtered).map(q=>({...q, options:shuffle(q.options.map((o,i)=>({text:o,orig:i})))}));
+            ci=0; score=0; answered=false; render();
+        }
+
+        function render(){
+            const q=currentQuestions[ci], container=document.getElementById('quizContainer');
+            container.innerHTML=`<div class="quiz-question"><div class="q-number">Soal ${ci+1}/${currentQuestions.length}</div><div class="q-sentence">${q.sentence}</div><div class="quiz-options">${q.options.map((o,i)=>`<div class="quiz-option" onclick="select(${i},this)">${o.text}</div>`).join('')}</div></div>`;
+        }
+
+        function select(index,el){
+            if(answered) return; answered=true;
+            const q=currentQuestions[ci];
+            document.querySelectorAll('.quiz-option').forEach(o=>o.style.pointerEvents='none');
+            if(q.options[index].orig===q.correct){ el.classList.add('correct'); score++; }
+            else { el.classList.add('wrong'); q.options.forEach((o,i)=>{ if(o.orig===q.correct) document.querySelectorAll('.quiz-option')[i].classList.add('correct'); }); }
+            setTimeout(()=>{ ci++; answered=false; ci<currentQuestions.length?render():showResult(); },800);
+        }
+
+        function showResult(){
+            const total=currentQuestions.length, p=Math.round((score/total)*100);
+            let sc='ok', m='💪 Terus berlatih!';
+            if(p===100){ sc='perfect'; m='🎉 Sempurna!'; } else if(p>=80){ sc='good'; m='👍 Bagus!'; }
+            const backLink=currentLessonId?`../lessons/${currentLessonId}.html`:'../index.html';
+            let prevBtn='', nextBtn='';
+            if(currentLessonId){
+                const pid=parseInt(currentLessonId)-1, nid=parseInt(currentLessonId)+1;
+                if(pid>=1) prevBtn=`<a href="quiz.html?lesson=${pid}" class="btn-retry btn-back">← Prev</a>`;
+                if(nid<=182) nextBtn=`<a href="quiz.html?lesson=${nid}" class="btn-retry btn-back">Next →</a>`;
+            }
+            document.getElementById('quizContainer').innerHTML=`<div class="quiz-question" style="text-align:center;"><h2>${m}</h2><div class="quiz-score ${sc}">${score}/${total}</div><p>${p}% benar</p><button class="btn-retry" onclick="startQuiz()">Coba Lagi</button><div style="display:flex;justify-content:center;gap:1rem;margin-top:1rem;">${prevBtn}<a href="${backLink}" class="btn-retry btn-back">📖 Lesson</a>${nextBtn}</div></div>`;
+        }
+
+        startQuiz();
+    </script>
 </body>
 </html>

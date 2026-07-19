@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gap Fill Quiz - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <style>
+        .gap-container { max-width: 750px; margin: 0 auto; }
+        .gap-card { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .gap-number { font-weight: bold; color: #2c3e50; margin-bottom: 1rem; }
+        .gap-sentence { font-size: 1.2rem; line-height: 2.5; padding: 1rem; background: #f8f9fa; border-radius: 8px; margin-bottom: 1rem; }
+        .gap-blank { display: inline-block; min-width: 70px; margin: 0 4px; text-align: center; padding: 2px 8px; color: #3498db; font-weight: bold; background: #eaf4ff; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
+        .gap-blank.filled { color: #2c3e50; background: #dbeafe; }
+        .gap-blank.correct { background: #d5f5e3; color: #27ae60; }
+        .gap-blank.wrong { background: #fadbd8; color: #e74c3c; }
+        .gap-options { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; justify-content: center; }
+        .gap-option { padding: 8px 20px; border: 2px solid #3498db; border-radius: 20px; cursor: pointer; background: white; font-size: 1rem; transition: all 0.2s; }
+        .gap-option:hover { background: #eaf4ff; }
+        .gap-option.used { opacity: 0.3; pointer-events: none; text-decoration: line-through; }
+        .gap-result { text-align: center; font-size: 1.1rem; margin-top: 0.8rem; font-weight: bold; }
+        .gap-result.correct { color: #27ae60; }
+        .gap-result.wrong { color: #e74c3c; }
+        .btn-retry { display: block; margin: 1rem auto; padding: 0.8rem 2rem; background: #2c3e50; color: white; border: none; border-radius: 25px; font-size: 1rem; cursor: pointer; }
+        .btn-back { background: #95a5a6; text-decoration: none; display: inline-block; text-align: center; }
+    </style>
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar"><h1>Gap Fill Quiz</h1></header>
+        <div class="content"><div class="gap-container" id="gapContainer"></div></div>
+    </div>
+
+    <script>
+        const gapData = [
+            {
+                lessonId: 1,
+                sentence: 'みんなの____を取り入れて、とても____プラン____出来____。',
+                answers: ['意見', 'いい', 'が', '上がった'],
+                options: ['意見', 'いい', 'が', '上がった']
+            },
+            {
+                lessonId: 1,
+                sentence: '____は____を____書き____。',
+                answers: ['彼女', '小説', '一ヶ月で', 'あげた'],
+                options: ['彼女', '小説', '一ヶ月で', 'あげた']
+            },
+            {
+                lessonId: 1,
+                sentence: 'この____は____新製品を____作り____。',
+                answers: ['会社', '最新の', '半年かけて', 'あげた'],
+                options: ['会社', '最新の', '半年かけて', 'あげた']
+            },
+            {
+                lessonId: 1,
+                sentence: '____の____を____で書き____。',
+                answers: ['研究', 'レポート', '一日', 'あげた'],
+                options: ['研究', 'レポート', '一日', 'あげた']
+            },
+            {
+                lessonId: 1,
+                sentence: '____た料理を____のところに____運ぶのが____仕事です。',
+                answers: ['出来上がっ', 'お客さん', 'すぐに', '私の'],
+                options: ['出来上がっ', 'お客さん', 'すぐに', '私の']
+            }
+        ];
+
+        let ci=0, score=0, totalBlanks=0, filled=[], usedOptions=[];
+        gapData.forEach(q=>totalBlanks+=q.answers.length);
+
+        function startQuiz(){ ci=0; score=0; render(); }
+        function render(){
+            const q=gapData[ci]; filled=new Array(q.answers.length).fill(null); usedOptions=[];
+            let bi=0, parts=q.sentence.split('____'), sHTML='';
+            parts.forEach((p,i)=>{ sHTML+=p; if(i<parts.length-1) sHTML+=`<span class="gap-blank" id="b${bi}" onclick="undoBlank(${bi})">____</span>`, bi++; });
+            const opts=[...q.options].sort(()=>Math.random()-0.5).map(o=>`<span class="gap-option" id="opt_${o.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g,'')}" onclick="fillBlank(this,'${o}')">${o}</span>`).join('');
+            document.getElementById('gapContainer').innerHTML=`<div class="gap-card"><div class="gap-number">Soal ${ci+1}/${gapData.length}</div><div class="gap-sentence">${sHTML}</div><div class="gap-options">${opts}</div><div class="gap-result" id="result"></div></div>`;
+        }
+        function fillBlank(el,v){
+            if(el.classList.contains('used')) return;
+            for(let i=0;i<filled.length;i++){
+                if(filled[i]===null){
+                    document.getElementById('b'+i).textContent=v; document.getElementById('b'+i).classList.add('filled');
+                    filled[i]=v; el.classList.add('used'); usedOptions.push({el:el, blankIndex:i, value:v});
+                    if(filled.every(x=>x!==null)) autoCheck();
+                    return;
+                }
+            }
+        }
+        function undoBlank(index){
+            if(filled[index]===null) return;
+            const v=filled[index];
+            // Kembalikan opsi
+            for(let i=0;i<usedOptions.length;i++){
+                if(usedOptions[i].blankIndex===index){
+                    usedOptions[i].el.classList.remove('used');
+                    usedOptions.splice(i,1);
+                    break;
+                }
+            }
+            // Kosongkan blank
+            document.getElementById('b'+index).textContent='____';
+            document.getElementById('b'+index).classList.remove('filled');
+            filled[index]=null;
+            // Sembunyikan result jika ada
+            const rd=document.getElementById('result');
+            if(rd) rd.textContent='';
+        }
+        function autoCheck(){
+            const q=gapData[ci], rd=document.getElementById('result'); let cc=0;
+            for(let i=0;i<q.answers.length;i++){
+                const b=document.getElementById('b'+i); b.style.cursor='default'; b.onclick=null;
+                if(filled[i]===q.answers[i]){ b.classList.add('correct'); cc++; }
+                else b.classList.add('wrong');
+            }
+            document.querySelectorAll('.gap-option').forEach(o=>o.style.pointerEvents='none');
+            score+=cc;
+            rd.textContent=cc===q.answers.length?'✅ Benar!':`❌ ${cc}/${q.answers.length} benar`;
+            rd.className='gap-result '+(cc===q.answers.length?'correct':'wrong');
+            setTimeout(()=>{ ci++; ci<gapData.length?render():showResult(); },1800);
+        }
+        function showResult(){
+            const p=Math.round((score/totalBlanks)*100), m=p===100?'🎉 Sempurna!':p>=80?'👍 Bagus!':'💪 Terus berlatih!';
+            document.getElementById('gapContainer').innerHTML=`<div class="gap-card" style="text-align:center;"><h2>${m}</h2><div style="font-size:2rem;font-weight:bold;color:#3498db;padding:1rem;">${score}/${totalBlanks}</div><p>${p}% benar</p><button class="btn-retry" onclick="startQuiz()">Coba Lagi</button><a href="../lessons/1.html" class="btn-retry btn-back">📖 Kembali ke Lesson</a></div>`;
+        }
+        startQuiz();
+    </script>
+</body>
+</html>

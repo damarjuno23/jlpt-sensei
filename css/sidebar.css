@@ -130,3 +130,12 @@
 .nav-link.hidden {
     display: none;
 }
+
+.grammar-group {
+    padding-left: 0;
+}
+
+.group-arrow {
+    font-size: 0.7rem;
+    margin-left: 5px;
+}

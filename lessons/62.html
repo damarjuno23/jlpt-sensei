@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>向き (muki) - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar"><h1>文法詳細</h1></header>
+        <div class="content">
+            <div class="lesson-header">
+                <div class="grammar-point">向き</div>
+                <div class="reading">むき (muki)</div>
+                <div class="meaning">cocok untuk-</div>
+                <div style="margin-top: 0.5rem; color: #95a5a6;">Halaman 131</div>
+            </div>
+            <div class="lesson-section">
+                <h3>📝 Cara Penggunaan</h3>
+                <div class="usage-box">
+                    <p><strong>Kata Benda</strong> + <strong>向き</strong></p>
+                </div>
+                <p style="margin-top: 1rem;">Pelajari tata bahasa Jepang: <strong>向き【むき】(muki)</strong>. Arti: <strong>cocok untuk-</strong>.</p>
+            </div>
+            <div class="lesson-section">
+                <h3>📖 Contoh Kalimat</h3>
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">1</span>この本は初心者<strong>向き</strong>である。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">この ほんは しょしんしゃ<strong>むき</strong>である。</div>
+                        <div class="romaji-text row-romaji">Kono hon wa shoshinsha <strong>muki</strong> de aru.</div>
+                        <div class="id-text row-arti">Buku ini cocok untuk pemula.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">2</span>その映画は子供<strong>向き</strong>だ。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">その えいがは こども<strong>むき</strong>だ。</div>
+                        <div class="romaji-text row-romaji">Sono eiga wa kodomo <strong>muki</strong> da.</div>
+                        <div class="id-text row-arti">Film itu cocok untuk anak-anak.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">3</span>このスキー場は初心者<strong>向き</strong>です。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">この スキーじょうは しょしんしゃ<strong>むき</strong>です。</div>
+                        <div class="romaji-text row-romaji">Kono sukii jou wa shoshinsha <strong>muki</strong> desu.</div>
+                        <div class="id-text row-arti">Resor ski ini cocok untuk pemula.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">4</span>このプレゼントは10歳の女の子<strong>向き</strong>だ。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">この プレゼントは 10さいの おんなのこ<strong>むき</strong>だ。</div>
+                        <div class="romaji-text row-romaji">Kono purezento wa 10 sai no onna no ko <strong>muki</strong> da.</div>
+                        <div class="id-text row-arti">Hadiah ini cocok untuk anak perempuan 10 tahun.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">5</span>若い女性<strong>向き</strong>の小説を書いています。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">わかい じょせい<strong>むき</strong>の しょうせつを かいています。</div>
+                        <div class="romaji-text row-romaji">Wakai josei <strong>muki</strong> no shousetsu o kaiteimasu.</div>
+                        <div class="id-text row-arti">Aku sedang menulis novel untuk wanita muda.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">6</span>こういう本は若い読者<strong>向き</strong>ではない。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">こういう ほんは わかい どくしゃ<strong>むき</strong>ではない。</div>
+                        <div class="romaji-text row-romaji">Kouiu hon wa wakai dokusha <strong>muki</strong> dewa nai.</div>
+                        <div class="id-text row-arti">Buku seperti ini tidak cocok untuk pembaca muda.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">7</span>この食堂のランチは安くて量が多く、学生<strong>向き</strong>だ。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">この しょくどうの ランチは やすくて りょうが おおく、がくせい<strong>むき</strong>だ。</div>
+                        <div class="romaji-text row-romaji">Kono shokudou no ranchi wa yasuku te ryou ga ooku, gakusei <strong>muki</strong> da.</div>
+                        <div class="id-text row-arti">Makan siang di kantin ini murah dan porsinya banyak, cocok untuk pelajar.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">8</span>彼は青少年<strong>向き</strong>の本をたくさん持っている。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">かれは せいしょうねん<strong>むき</strong>の ほんを たくさん もっている。</div>
+                        <div class="romaji-text row-romaji">Kare wa seishounen <strong>muki</strong> no hon o takusan motteiru.</div>
+                        <div class="id-text row-arti">Dia punya banyak buku untuk remaja.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation">
+                <a href="61.html" class="nav-button">← Prev</a>
+                <a href="../quiz/quiz.html?lesson=62" class="nav-button">📝 Quiz</a>
+                <a href="63.html" class="nav-button">Next →</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

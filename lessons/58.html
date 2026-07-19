@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>も〜ば〜も (mo~ba~mo) - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar"><h1>文法詳細</h1></header>
+        <div class="content">
+            <div class="lesson-header">
+                <div class="grammar-point">も〜ば〜も</div>
+                <div class="reading">mo~ba~mo</div>
+                <div class="meaning">dan; juga; baik... maupun</div>
+                <div style="margin-top: 0.5rem; color: #95a5a6;">Halaman 123</div>
+            </div>
+            <div class="lesson-section">
+                <h3>📝 Cara Penggunaan</h3>
+                <div class="usage-box">
+                    <p><strong>Kata Benda 1 + も</strong> + Kata Kerja <strong>(bentuk ば)</strong> + <strong>Kata Benda 2 + も</strong></p>
+                    <p><strong>Kata Benda + も</strong> + <strong>なら</strong> + <strong>Kata Benda 2 + も</strong></p>
+                    <p><strong>い-adj + ければ</strong> + <strong>も</strong></p>
+                </div>
+                <p style="margin-top: 1rem;">Pelajari tata bahasa Jepang: <strong>も〜ば〜も (mo~ba~mo)</strong>. Arti: <strong>dan; juga; baik... maupun; entah... atau</strong>.</p>
+                <p>Digunakan untuk menunjukkan [A] dan [B] ada bersama. Bisa dengan 2 poin positif, 2 negatif, atau 1 positif 1 negatif.</p>
+            </div>
+            <div class="lesson-section">
+                <h3>📖 Contoh Kalimat</h3>
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">1</span>本を読むのが好きな人<strong>も</strong>いれ<strong>ば</strong>、嫌いな人<strong>も</strong>います。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">ほんを よむのが すきな ひと<strong>も</strong> いれ<strong>ば</strong>、きらいな ひと<strong>も</strong> います。</div>
+                        <div class="romaji-text row-romaji">Hon o yomu no ga suki na hito <strong>mo</strong> ire<strong>ba</strong>, kirai na hito <strong>mo</strong> imasu.</div>
+                        <div class="id-text row-arti">Ada orang yang suka membaca buku, ada juga yang tidak suka.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">2</span>学生の態度<strong>も</strong>悪けれ<strong>ば</strong>教師の態度<strong>も</strong>悪い。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">がくせいの たいど<strong>も</strong> わるけれ<strong>ば</strong> きょうしの たいど<strong>も</strong> わるい。</div>
+                        <div class="romaji-text row-romaji">Gakusei no taido <strong>mo</strong> warukere<strong>ba</strong> kyoushi no taido <strong>mo</strong> warui.</div>
+                        <div class="id-text row-arti">Sikap muridnya buruk, sikap gurunya juga buruk.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">3</span>人生は楽しいこと<strong>も</strong>あれ<strong>ば</strong>、苦しいこと<strong>も</strong>ある。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">じんせいは たのしいこと<strong>も</strong> あれ<strong>ば</strong>、くるしいこと<strong>も</strong> ある。</div>
+                        <div class="romaji-text row-romaji">Jinsei wa tanoshii koto <strong>mo</strong> are<strong>ba</strong>, kurushii koto <strong>mo</strong> aru.</div>
+                        <div class="id-text row-arti">Dalam hidup ada suka dan duka.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">4</span>彼は日本語<strong>も</strong>できれ<strong>ば</strong>英語<strong>も</strong>できる。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">かれは にほんご<strong>も</strong> できれ<strong>ば</strong> えいご<strong>も</strong> できる。</div>
+                        <div class="romaji-text row-romaji">Kare wa nihongo <strong>mo</strong> dekire<strong>ba</strong> eigo <strong>mo</strong> dekiru.</div>
+                        <div class="id-text row-arti">Dia bisa bahasa Jepang dan juga bahasa Inggris.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">5</span>あのメキシコ料理屋の食べ物は、値段<strong>も</strong>安けれ<strong>ば</strong>味<strong>も</strong>いいです。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">あの メキシコりょうりやの たべものは、ねだん<strong>も</strong> やすけれ<strong>ば</strong> あじ<strong>も</strong> いいです。</div>
+                        <div class="romaji-text row-romaji">Ano mekishiko ryouriya no tabemono wa, nedan <strong>mo</strong> yasukere<strong>ba</strong> aji <strong>mo</strong> ii desu.</div>
+                        <div class="id-text row-arti">Restoran Meksiko itu harganya murah dan rasanya juga enak.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">6</span>私の彼氏はタバコ<strong>も</strong>吸わなけれ<strong>ば</strong>、お酒<strong>も</strong>飲まない。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">わたしの かれしは タバコ<strong>も</strong> すわなけれ<strong>ば</strong>、おさけ<strong>も</strong> のまない。</div>
+                        <div class="romaji-text row-romaji">Watashi no kareshi wa tabako <strong>mo</strong> suwanakere<strong>ba</strong>, osake <strong>mo</strong> nomanai.</div>
+                        <div class="id-text row-arti">Pacarku tidak merokok dan juga tidak minum alkohol.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">7</span>どこかへ旅行に行きたいけど、時間<strong>も</strong>なけれ<strong>ば</strong>、お金<strong>も</strong>ない。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">どこかへ りょこうに いきたいけど、じかん<strong>も</strong> なけれ<strong>ば</strong>、おかね<strong>も</strong> ない。</div>
+                        <div class="romaji-text row-romaji">Doko ka e ryokou ni ikitai kedo, jikan <strong>mo</strong> nakere<strong>ba</strong>, okane <strong>mo</strong> nai.</div>
+                        <div class="id-text row-arti">Aku ingin bepergian, tapi tidak punya waktu dan juga tidak punya uang.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">8</span>このバッグは値段<strong>も</strong>手頃<strong>なら</strong>、デザイン<strong>も</strong>かわいくてすぐ買ってしまった。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">この バッグは ねだん<strong>も</strong> てごろ<strong>なら</strong>、デザイン<strong>も</strong> かわいくて すぐ かって しまった。</div>
+                        <div class="romaji-text row-romaji">Kono baggu wa nedan <strong>mo</strong> tegoro <strong>nara</strong>, dezain <strong>mo</strong> kawaikute sugu katte shimatta.</div>
+                        <div class="id-text row-arti">Tas ini harganya terjangkau dan desainnya juga lucu, jadi aku langsung membelinya.</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="jp-text"><span class="example-number">9</span>父はお酒<strong>も</strong>飲め<strong>ば</strong>たばこ<strong>も</strong>吸うので、健康が心配だ。</div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">ちちは おさけ<strong>も</strong> のめ<strong>ば</strong> たばこ<strong>も</strong> すうので、けんこうが しんぱいだ。</div>
+                        <div class="romaji-text row-romaji">Chichi wa osake <strong>mo</strong> nome<strong>ba</strong> tabako <strong>mo</strong> suu node, kenkou ga shinpai da.</div>
+                        <div class="id-text row-arti">Ayahku minum alkohol dan juga merokok, jadi aku khawatir dengan kesehatannya.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation">
+                <a href="57.html" class="nav-button">← Prev</a>
+                <a href="../quiz/quiz.html?lesson=58" class="nav-button">📝 Quiz</a>
+                <a href="59.html" class="nav-button">Next →</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

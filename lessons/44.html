@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>切る (kiru) - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar">
+            <h1>文法詳細</h1>
+        </header>
+
+        <div class="content">
+            <div class="lesson-header">
+                <div class="grammar-point">切る</div>
+                <div class="reading">きる (kiru)</div>
+                <div class="meaning">melakukan sesuatu sepenuhnya sampai akhir</div>
+                <div style="margin-top: 0.5rem; color: #95a5a6;">Halaman 94</div>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📝 Cara Penggunaan</h3>
+                <div class="usage-box">
+                    <p><strong>Kata Kerja ます (bentuk stem)</strong> + <strong>切る / 切れる</strong></p>
+                </div>
+                <p style="margin-top: 1rem;">Pelajari tata bahasa Jepang: <strong>切る【きる】(kiru)</strong>. Arti: <strong>melakukan sesuatu sepenuhnya sampai akhir</strong>.</p>
+                <p>Ubah ke <strong>切れる (kireru)</strong> untuk menyatakan mampu menyelesaikan sepenuhnya. Lawannya gunakan <strong>切れない (kirenai)</strong>.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h3>📖 Contoh Kalimat</h3>
+
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">1</span>
+                            どうしてそう言い<strong>切れる</strong>のですか。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">どうして そう いい<strong>きれる</strong>のですか。</div>
+                        <div class="romaji-text row-romaji">Doushite sou ii <strong>kireru</strong> no desu ka?</div>
+                        <div class="id-text row-arti">Bagaimana kamu bisa mengatakan itu?</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">2</span>
+                            長い小説を2日間で読み<strong>切った</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">ながい しょうせつを ふつかかんで よみ<strong>きった</strong>。</div>
+                        <div class="romaji-text row-romaji">Nagai shousetsu o futsukakan de yomi<strong>kitta</strong>.</div>
+                        <div class="id-text row-arti">Aku selesai membaca novel panjang itu dalam dua hari.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">3</span>
+                            お小遣いを使い<strong>切って</strong>しまった。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">おこづかいを つかい<strong>きって</strong>しまった。</div>
+                        <div class="romaji-text row-romaji">Okozukai o tsukai<strong>kitte</strong> shimatta.</div>
+                        <div class="id-text row-arti">Aku menghabiskan semua uang sakuku.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">4</span>
+                            今日はもう魚を全部売り<strong>切れた</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">きょうは もう さかなを ぜんぶ うり<strong>きれた</strong>。</div>
+                        <div class="romaji-text row-romaji">Kyou wa mou sakana o zenbu uri <strong>kireta</strong>.</div>
+                        <div class="id-text row-arti">Aku sudah menjual habis semua ikan hari ini.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">5</span>
+                            どんなに食べ物が多くても食べ<strong>切れる</strong>ぐらいお腹すいた。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">どんなに たべものが おおくても たべ<strong>きれる</strong>ぐらい おなか すいた。</div>
+                        <div class="romaji-text row-romaji">Donnani tabemono ga ookutemo tabe <strong>kireru</strong> gurai onaka suita.</div>
+                        <div class="id-text row-arti">Aku sangat lapar sampai bisa menghabiskan semua makanan, tidak peduli seberapa banyak.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">6</span>
+                            10キロを走り<strong>切る</strong>のはすごく大変なことだ。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">10キロを はしり<strong>きる</strong>のは すごく たいへんな ことだ。</div>
+                        <div class="romaji-text row-romaji">Juu kiro o hashiri <strong>kiru</strong> no wa sugoku taihen na koto da.</div>
+                        <div class="id-text row-arti">Sangat sulit untuk berlari 10 kilometer sampai selesai.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">7</span>
+                            たくさんあった宿題のレポートを書き<strong>切りました</strong>。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">たくさん あった しゅくだいの レポートを かき<strong>きりました</strong>。</div>
+                        <div class="romaji-text row-romaji">Takusan atta shukudai no repooto o kaki <strong>kirimashita</strong>.</div>
+                        <div class="id-text row-arti">Aku selesai menulis semua laporan PR yang banyak itu.</div>
+                    </div>
+
+                    <div class="example-item">
+                        <div class="jp-text">
+                            <span class="example-number">8</span>
+                            どんなことでも、全力でやり<strong>切った</strong>あとは、気分がいい。
+                        </div>
+                        <div class="example-toggles">
+                            <button class="toggle-btn toggle-kana" onclick="toggleRow(this, 'kana')">Kana</button>
+                            <button class="toggle-btn toggle-romaji" onclick="toggleRow(this, 'romaji')">Romaji</button>
+                            <button class="toggle-btn toggle-arti" onclick="toggleRow(this, 'arti')">Translation</button>
+                        </div>
+                        <div class="kana-text row-kana">どんなことでも、ぜんりょくで やり<strong>きった</strong>あとは、きぶんが いい。</div>
+                        <div class="romaji-text row-romaji">Donna koto demo, zenryoku de yari <strong>kitta</strong> ato wa, kibun ga ii.</div>
+                        <div class="id-text row-arti">Apapun tugasnya, selalu terasa enak setelah menyelesaikannya dengan sepenuh tenaga.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="43.html" class="nav-button">← Prev</a>
+                <a href="../quiz/quiz.html?lesson=44" class="nav-button">📝 Quiz</a>
+                <a href="45.html" class="nav-button">Next →</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

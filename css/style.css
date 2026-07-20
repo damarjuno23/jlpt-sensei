@@ -58,14 +58,15 @@ body {
 .grammar-card {
     background: #f0b01f;
     border-radius: 10px;
-    padding: 1rem;
+    padding: 0.8rem;
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.2s;
     border-left: 2px solid white;
     text-decoration: none;
     color: inherit;
     display: block;
+    text-align: center;
 }
 
 .grammar-card .jp {
@@ -242,15 +243,15 @@ body {
 }
 
 .example-item .kana-text {
-    background: #b2ebf2;
+    background: #abd9df;
     color: black;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     padding: 6px 14px;
     display: none;
 }
 
 .example-item .romaji-text {
-    background: #d7d7d7;
+    background: #c0bfbf;
     color: #384653;
     font-size: 0.9rem;
     font-style: italic;

@@ -207,7 +207,7 @@ function generateSidebar(currentPageId = null) {
         
         grammarListHTML += `
             <li class="nav-section" onclick="toggleGroup(this)" style="cursor:pointer;">
-                📖 Grammar ${start}-${end} <span class="group-arrow">▶</span>
+                 Lesson ${start}-${end} <span class="group-arrow">▶</span>
             </li>
             <div class="grammar-group" style="display:none;">
                 ${group.map(g => {
@@ -285,6 +285,7 @@ function toggleGroup(el) {
         arrow.textContent = '▶';
     }
 }
+
 
 // Close sidebar on outside click (mobile)
 document.addEventListener('click', (e) => {

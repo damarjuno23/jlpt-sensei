@@ -20,6 +20,15 @@
         .quiz-score.perfect { color: #27ae60; } .quiz-score.good { color: #3498db; } .quiz-score.ok { color: #f39c12; }
         .btn-retry { display: block; margin: 1rem auto; padding: 0.8rem 2rem; background: #2c3e50; color: white; border: none; border-radius: 25px; font-size: 1rem; cursor: pointer; }
         .btn-back { background: #95a5a6; text-decoration: none; display: inline-block; text-align: center; }
+        .quiz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.6rem; }
+        .quiz-card { background: white; border-radius: 10px; padding: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.06); cursor: pointer; text-decoration: none; color: inherit; text-align: center; transition: all 0.2s; border-top: 3px solid #e74c3c; }
+        .quiz-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+        .quiz-card .qc-num { font-size: 0.8rem; color: #7f8c8d; }
+        .quiz-card .qc-title { font-size: 0.9rem; font-weight: bold; color: #2c3e50; }
+        .quiz-header { text-align: center; margin-bottom: 1.5rem; }
+        .quiz-header h2 { margin-bottom: 0.5rem; }
+        .btn-random { display: inline-block; padding: 0.6rem 1.5rem; background: #e74c3c; color: white; border-radius: 25px; text-decoration: none; margin: 0.5rem; font-size: 0.9rem; }
+        .btn-random:hover { background: #c0392b; }
         .quiz-empty { text-align: center; padding: 3rem; color: #95a5a6; font-size: 1.2rem; }
     </style>
     <script src="../app.js"></script>
@@ -29,26 +38,35 @@
         <header class="top-bar"><h1>Multiple Choice Quiz</h1></header>
         <div class="content"><div class="quiz-container" id="quizContainer"></div></div>
     </div>
-
     <script src="quiz-mc-data.js"></script>
     <script>
-        let currentQuestions=[], ci=0, score=0, answered=false, currentLessonId=null;
-
+        let currentQuestions=[], ci=0, score=0, answered=false;
+        let wrongQuestions = [];
+        function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
         function getParam(p){ return new URL(window.location.href).searchParams.get(p); }
 
-        function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+        function showGrid(){
+            const totalLessons=Object.keys(allMCData).length;
+            let html=`<div class="quiz-header"><h2>📝 Multiple Choice Quiz</h2>
+                <a href="quiz.html?random=5" class="btn-random">🎲 Random 5 Soal</a>
+                <a href="../index.html" class="btn-retry btn-back" style="display:inline-block;">← Home</a>
+                </div><div class="quiz-grid">`;
+            for(let i=1;i<=totalLessons;i++){
+                if(allMCData[i]) html+=`<a href="quiz.html?random=5" class="quiz-card"><div class="qc-num">#${i}</div><div class="qc-title">Quiz ${i}</div></a>`;
+            }
+            html+=`</div>`;
+            document.getElementById('quizContainer').innerHTML=html;
+        }
 
         function startQuiz(){
-            currentLessonId=getParam('lesson');
+             wrongQuestions = [];
+            const random=getParam('random');
+            if(!random){ showGrid(); return; }
             let filtered=[];
-            if(currentLessonId && allMCData[currentLessonId]){
-                filtered=allMCData[currentLessonId];
-            } else {
-                for(let k in allMCData){ filtered=filtered.concat(allMCData[k]); }
-                filtered=shuffle(filtered).slice(0,10);
-            }
+            for(let k in allMCData){ filtered=filtered.concat(allMCData[k]); }
+            filtered=shuffle(filtered).slice(0,parseInt(random));
             if(filtered.length===0){
-                document.getElementById('quizContainer').innerHTML=`<div class="quiz-empty"><p>📝 Belum ada soal.</p><a href="../index.html" class="btn-retry btn-back">← Home</a></div>`;
+                document.getElementById('quizContainer').innerHTML=`<div class="quiz-empty"><p>📝 Belum ada soal.</p><a href="quiz.html" class="btn-retry btn-back">← Back</a></div>`;
                 return;
             }
             currentQuestions=shuffle(filtered).map(q=>({...q, options:shuffle(q.options.map((o,i)=>({text:o,orig:i})))}));
@@ -56,33 +74,67 @@
         }
 
         function render(){
-            const q=currentQuestions[ci], container=document.getElementById('quizContainer');
-            container.innerHTML=`<div class="quiz-question"><div class="q-number">Soal ${ci+1}/${currentQuestions.length}</div><div class="q-sentence">${q.sentence}</div><div class="quiz-options">${q.options.map((o,i)=>`<div class="quiz-option" onclick="select(${i},this)">${o.text}</div>`).join('')}</div></div>`;
+            const q=currentQuestions[ci];
+            document.getElementById('quizContainer').innerHTML=`<div class="quiz-question"><div class="q-number">Soal ${ci+1}/${currentQuestions.length}</div><div class="q-sentence">${q.sentence}</div><div class="quiz-options">${q.options.map((o,i)=>`<div class="quiz-option" onclick="select(${i},this)">${o.text}</div>`).join('')}</div></div>`;
         }
 
         function select(index,el){
-            if(answered) return; answered=true;
-            const q=currentQuestions[ci];
-            document.querySelectorAll('.quiz-option').forEach(o=>o.style.pointerEvents='none');
-            if(q.options[index].orig===q.correct){ el.classList.add('correct'); score++; }
-            else { el.classList.add('wrong'); q.options.forEach((o,i)=>{ if(o.orig===q.correct) document.querySelectorAll('.quiz-option')[i].classList.add('correct'); }); }
-            setTimeout(()=>{ ci++; answered=false; ci<currentQuestions.length?render():showResult(); },800);
-        }
+    if(answered) return; answered=true;
+    const q=currentQuestions[ci];
+    document.querySelectorAll('.quiz-option').forEach(o=>o.style.pointerEvents='none');
+    if(q.options[index].orig===q.correct){ 
+        el.classList.add('correct'); 
+        score++; 
+    } else { 
+        el.classList.add('wrong'); 
+        q.options.forEach((o,i)=>{ if(o.orig===q.correct) document.querySelectorAll('.quiz-option')[i].classList.add('correct'); }); 
+        wrongQuestions.push({
+            sentence: q.sentence, 
+            options: q.options.map(o => o.text),
+            correct: q.correct,
+            userAnswer: q.options[index].text
+        });
+    }
+    setTimeout(()=>{ ci++; answered=false; ci<currentQuestions.length?render():showResult(); },800);
+}
 
         function showResult(){
-            const total=currentQuestions.length, p=Math.round((score/total)*100);
-            let sc='ok', m='💪 Terus berlatih!';
-            if(p===100){ sc='perfect'; m='🎉 Sempurna!'; } else if(p>=80){ sc='good'; m='👍 Bagus!'; }
-            const backLink=currentLessonId?`../lessons/${currentLessonId}.html`:'../index.html';
-            let prevBtn='', nextBtn='';
-            if(currentLessonId){
-                const pid=parseInt(currentLessonId)-1, nid=parseInt(currentLessonId)+1;
-                if(pid>=1) prevBtn=`<a href="quiz.html?lesson=${pid}" class="btn-retry btn-back">← Prev</a>`;
-                if(nid<=182) nextBtn=`<a href="quiz.html?lesson=${nid}" class="btn-retry btn-back">Next →</a>`;
-            }
-            document.getElementById('quizContainer').innerHTML=`<div class="quiz-question" style="text-align:center;"><h2>${m}</h2><div class="quiz-score ${sc}">${score}/${total}</div><p>${p}% benar</p><button class="btn-retry" onclick="startQuiz()">Coba Lagi</button><div style="display:flex;justify-content:center;gap:1rem;margin-top:1rem;">${prevBtn}<a href="${backLink}" class="btn-retry btn-back">📖 Lesson</a>${nextBtn}</div></div>`;
-        }
+    const total=currentQuestions.length, p=Math.round((score/total)*100);
+    let sc='ok', m='💪 Terus berlatih!';
+    if(p===100){ sc='perfect'; m='🎉 Sempurna!'; } else if(p>=80){ sc='good'; m='👍 Bagus!'; }
+    let reviewBtn = '';
+    if(wrongQuestions.length > 0) {
+        reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#e74c3c;">🔁 Review ${wrongQuestions.length} Soal Salah</button>`;
+    }
+    document.getElementById('quizContainer').innerHTML=`<div class="quiz-question" style="text-align:center;"><h2>${m}</h2><div class="quiz-score ${sc}">${score}/${total}</div><p>${p}% benar</p>
+    <button class="btn-retry" onclick="startQuiz()">Coba Lagi</button>
+    ${reviewBtn}
+    <a href="quiz.html" class="btn-retry btn-back">📋 Semua Kuis</a></div>`;
+}
 
+
+function reviewWrong() {
+    if(wrongQuestions.length === 0) return;
+    let html = `<div class="quiz-header"><h2>📝 Review Soal Salah</h2><p>${wrongQuestions.length} soal</p></div>`;
+    
+    wrongQuestions.forEach((q, i) => {
+        const correctAnswer = q.options[q.correct];
+        html += `
+        <div class="quiz-question">
+            <div class="q-number">Soal ${i+1}</div>
+            <div class="q-sentence">${q.sentence}</div>
+            <div style="margin-top:0.8rem;">
+                <p>❌ Jawaban kamu: <strong style="color:#e74c3c;">${q.userAnswer}</strong></p>
+                <p>✅ Jawaban benar: <strong style="color:#27ae60;">${correctAnswer}</strong></p>
+            </div>
+        </div>`;
+    });
+    
+    html += `<button class="btn-retry" onclick="startQuiz()">🔄 Kuis Baru</button>
+             <a href="quiz.html" class="btn-retry btn-back">📋 Semua Kuis</a>`;
+    
+    document.getElementById('quizContainer').innerHTML = html;
+}
         startQuiz();
     </script>
 </body>

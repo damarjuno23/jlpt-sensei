@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>例えば (tatoeba) - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar"><h1>文法詳細</h1></header>
+        <div class="content">
+            <div class="lesson-header">
+                <div class="grammar-point">例えば</div>
+                <div class="reading">たとえば (tatoeba)</div>
+                <div class="meaning">misalnya</div>
+                <div style="margin-top: 0.5rem; color: #95a5a6;">Halaman 253</div>
+            </div>
+            <div class="lesson-section">
+                <h3>📝 Cara Penggunaan</h3>
+                <div class="usage-box"><p><strong>例えば</strong> + contoh</p></div>
+                <p style="margin-top: 1rem;">Arti: <strong>misalnya; contohnya</strong>.</p>
+            </div>
+            <div class="lesson-section">
+                <h3>📖 Contoh Kalimat</h3>
+                <div class="example-list">
+                    <div class="example-item"><div class="jp-text"><span class="example-number">1</span>日本の食べ物は美味しいです。<strong>例えば</strong>、すしはすごく美味しい！</div><div class="example-toggles"><button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button><button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button><button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button></div><div class="kana-text row-kana">にほんの たべものは おいしいです。<strong>たとえば</strong>、すしは すごく おいしい！</div><div class="romaji-text row-romaji">Nihon no tabemono wa oishii desu. <strong>Tatoeba</strong>, sushi wa sugoku oishii!</div><div class="id-text row-arti">Makanan Jepang enak. Misalnya, sushi sangat enak!</div></div>
+                    <div class="example-item"><div class="jp-text"><span class="example-number">2</span>私にはたくさん趣味がある。<strong>例えば</strong>魚釣り、登山です。</div><div class="example-toggles"><button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button><button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button><button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button></div><div class="kana-text row-kana">わたしには たくさん しゅみが ある。<strong>たとえば</strong> さかなつり、とざんです。</div><div class="romaji-text row-romaji">Watashi ni wa takusan shumi ga aru. <strong>Tatoeba</strong> sakana tsuri, tozan desu.</div><div class="id-text row-arti">Aku punya banyak hobi, memancing dan mendaki gunung misalnya.</div></div>
+                    <div class="example-item"><div class="jp-text"><span class="example-number">3</span>私は<strong>例えば</strong>イタリアやスペインなど外国へ行きたい。</div><div class="example-toggles"><button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button><button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button><button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button></div><div class="kana-text row-kana">わたしは<strong>たとえば</strong> イタリアや スペインなど がいこくへ いきたい。</div><div class="romaji-text row-romaji">Watashi wa <strong>tatoeba</strong> itaria ya supein nado gaikoku e ikitai.</div><div class="id-text row-arti">Aku ingin pergi ke luar negeri, misalnya ke Italia dan Spanyol.</div></div>
+                    <div class="example-item"><div class="jp-text"><span class="example-number">4</span>外国、<strong>例えば</strong>アメリカへ行ったことがありますか。</div><div class="example-toggles"><button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button><button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button><button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button></div><div class="kana-text row-kana">がいこく、<strong>たとえば</strong> アメリカへ いったことが ありますか。</div><div class="romaji-text row-romaji">Gaikoku, <strong>tatoeba</strong> amerika e itta koto ga arimasu ka?</div><div class="id-text row-arti">Apakah kamu pernah ke luar negeri, misalnya Amerika?</div></div>
+                    <div class="example-item"><div class="jp-text"><span class="example-number">5</span>彼は不思議な生物、<strong>例えば</strong>ヘビのような生物が好きです。</div><div class="example-toggles"><button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button><button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button><button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button></div><div class="kana-text row-kana">かれは ふしぎな せいぶつ、<strong>たとえば</strong> ヘビのような せいぶつが すきです。</div><div class="romaji-text row-romaji">Kare wa fushigina seibutsu, <strong>tatoeba</strong> hebi no you na seibutsu ga suki desu.</div><div class="id-text row-arti">Dia suka makhluk aneh, misalnya makhluk seperti ular.</div></div>
+                    <div class="example-item"><div class="jp-text"><span class="example-number">6</span>私はうるさい音楽は好きではない。<strong>例えば</strong>ロックのような。</div><div class="example-toggles"><button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button><button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button><button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button></div><div class="kana-text row-kana">わたしは うるさい おんがくは すきではない。<strong>たとえば</strong> ロックのような。</div><div class="romaji-text row-romaji">Watashi wa urusai ongaku wa suki dewa nai. <strong>Tatoeba</strong> rokku no youna.</div><div class="id-text row-arti">Aku tidak suka musik berisik, contohnya seperti rock.</div></div>
+                    <div class="example-item"><div class="jp-text"><span class="example-number">7</span>日本ではきれいな都市がたくさんあります。<strong>例えば</strong>京都、奈良だ。</div><div class="example-toggles"><button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button><button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button><button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button></div><div class="kana-text row-kana">にほんでは きれいな としが たくさん あります。<strong>たとえば</strong> きょうと、ならだ。</div><div class="romaji-text row-romaji">Nihon dewa kirei na toshi ga takusan arimasu. <strong>Tatoeba</strong> kyouto, nara da.</div><div class="id-text row-arti">Jepang punya banyak kota indah. Kyoto dan Nara, misalnya.</div></div>
+                    <div class="example-item"><div class="jp-text"><span class="example-number">8</span>彼の部屋に色んなものがある。<strong>例えば</strong>、ゲーム機、ジムの物など。</div><div class="example-toggles"><button class="toggle-btn toggle-kana" onclick="toggleRow(this,'kana')">Kana</button><button class="toggle-btn toggle-romaji" onclick="toggleRow(this,'romaji')">Romaji</button><button class="toggle-btn toggle-arti" onclick="toggleRow(this,'arti')">Translation</button></div><div class="kana-text row-kana">かれの へやに いろんな ものが ある。<strong>たとえば</strong>、ゲームき、ジムの ものなど。</div><div class="romaji-text row-romaji">Kare no heya ni iron na mono ga aru. <strong>Tatoeba</strong>, geemuki, jimu no mono nado.</div><div class="id-text row-arti">Ada berbagai barang di kamarnya. Misalnya, konsol game, alat gym, dll.</div></div>
+                </div>
+            </div>
+            <div class="navigation"><a href="121.html" class="nav-button">← Prev</a><a href="../quiz/quiz.html?random=5" class="nav-button">📝 Quiz</a><a href="123.html" class="nav-button">Next →</a></div>
+        </div>
+    </div>
+</body>
+</html>

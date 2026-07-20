@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Kuis - N3 文法</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <style>
+        .select-container { max-width: 500px; margin: 3rem auto; text-align: center; }
+        .select-card { background: white; border-radius: 12px; padding: 2rem; margin: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; text-decoration: none; display: block; transition: all 0.3s; border-top: 4px solid #3498db; }
+        .select-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+        .select-card.mc { border-top-color: #e74c3c; }
+        .select-card.gap { border-top-color: #27ae60; }
+        .select-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .select-card .emoji { font-size: 2.5rem; }
+        .select-card p { color: #7f8c8d; }
+    </style>
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar"><h1>Pilih Tipe Kuis</h1></header>
+        <div class="content">
+            <div class="select-container" id="selectContainer"></div>
+        </div>
+    </div>
+    <script>
+        const params = new URL(window.location.href).searchParams;
+        const lessonId = params.get('lesson') || '';
+        const prefix = lessonId ? `?lesson=${lessonId}` : '';
+
+        document.getElementById('selectContainer').innerHTML = `
+            <a href="quiz.html?random=5" class="select-card mc">
+                <div class="emoji">🎯</div>
+                <h3>Multiple Choice</h3>
+                <p>Pilih jawaban yang benar dari 4 opsi</p>
+            </a>
+            <a href="quiz-gap.html${prefix}" class="select-card gap">
+                <div class="emoji">🧩</div>
+                <h3>Gap Fill</h3>
+                <p>Susun kata di dalam kalimat</p>
+            </a>
+            <a href="../index.html" style="color:#7f8c8d; text-decoration:none; display:inline-block; margin-top:1rem;">← Kembali</a>
+        `;
+    </script>
+</body>
+</html>

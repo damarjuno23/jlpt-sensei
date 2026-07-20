@@ -285,7 +285,26 @@ function toggleGroup(el) {
         arrow.textContent = '▶';
     }
 }
-
+function addQuizButton() {
+    const nav = document.querySelector('.navigation');
+    if (!nav) return;
+    
+    const path = window.location.pathname;
+    const match = path.match(/lessons\/(\d+)\.html/);
+    if (!match) return;
+    
+    const lessonId = match[1];
+    
+    const quizBtn = document.createElement('a');
+    quizBtn.href = `../quiz/select.html?lesson=${lessonId}`;
+    quizBtn.className = 'nav-button';
+    quizBtn.textContent = '📝 Quiz';
+    quizBtn.style.background = '#e74c3c';
+    
+    // Sisipkan di antara Prev dan Next
+    const nextBtn = nav.querySelector('a:last-child');
+    nav.insertBefore(quizBtn, nextBtn);
+}
 
 // Close sidebar on outside click (mobile)
 document.addEventListener('click', (e) => {
@@ -317,4 +336,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (path.includes('index.html') || path.endsWith('/N3/') || path.endsWith('/')) {
         generateSidebar(null);
     }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    addQuizButton();
 });

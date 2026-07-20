@@ -89,11 +89,11 @@
         el.classList.add('wrong'); 
         q.options.forEach((o,i)=>{ if(o.orig===q.correct) document.querySelectorAll('.quiz-option')[i].classList.add('correct'); }); 
         wrongQuestions.push({
-            sentence: q.sentence, 
-            options: q.options.map(o => o.text),
-            correct: q.correct,
-            userAnswer: q.options[index].text
-        });
+    sentence: q.sentence, 
+    options: q.options.map(o => o.text), // simpan sebagai array string
+    correct: q.correct,
+    userAnswer: q.options[index].text
+});
     }
     setTimeout(()=>{ ci++; answered=false; ci<currentQuestions.length?render():showResult(); },800);
 }

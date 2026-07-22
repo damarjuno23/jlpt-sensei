@@ -21,25 +21,21 @@ body {
     gap: 1rem;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 2000;
+}
+.top-bar h1 {
+    font-size: 1.3rem;
 }
 
-.menu-btn {
+.top-bar .menu-btn {
     background: none;
     border: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     cursor: pointer;
-    padding: 0.3rem 0.8rem;
-    border-radius: 5px;
-}
-
-.menu-btn:hover {
-    background: rgba(255,255,255,0.1);
-}
-
-.top-bar h1 {
-    font-size: 1.3rem;
+    display: none;
+    position: relative;
+    z-index: 2001;
 }
 
 /* Main Content */
@@ -54,52 +50,49 @@ body {
     max-width: 100%;
 }
 
-/* Grammar Grid */
-
+/* Grammar List (index) */
 .grammar-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
     gap: 0.4rem;
 }
 
 .grammar-card {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.5rem 1rem;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.5rem;
     background: #f0b01f;
-    border-radius: 8px;
-    border-left: 3px solid white;
+    border-radius: 6px;
     text-decoration: none;
     color: inherit;
+    font-size: 0.75rem;
+    text-align: center;
     transition: all 0.2s;
 }
 
 .grammar-card:hover {
-    transform: scale(1.02);
-    z-index: 10;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transform: scale(1.05);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
 .grammar-card .number {
-    font-size: 0.8rem;
-    min-width: 30px;
-    color: black;
+    font-size: 0.65rem;
 }
 
 .grammar-card .jp {
-    font-size: 1rem;
+    font-size: 0.75rem;
     font-weight: bold;
-    min-width: 100px;
 }
 
-.grammar-card .romaji {
-    font-size: 0.8rem;
-    color: #880808;
-}
-
+.grammar-card .romaji,
 .grammar-card .meaning,
 .grammar-card .page {
+    display: none;
+}
+
+.welcome-section {
     display: none;
 }
 
@@ -142,38 +135,6 @@ body {
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid #3498db;
-}
-
-/* Navigation */
-.navigation {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-    gap: 1rem;
-}
-
-.nav-button {
-    padding: 0.8rem 1.5rem;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: background 0.3s;
-}
-
-.nav-button:hover {
-    background: #2980b9;
-}
-
-.nav-button.home {
-    background: #95a5a6;
-}
-
-.nav-button.home:hover {
-    background: #7f8c8d;
 }
 
 /* Usage Box */
@@ -297,36 +258,38 @@ body {
     color: white;
 }
 
+/* Navigation */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.nav-button {
+    padding: 0.8rem 1.5rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.nav-button:hover {
+    background: #2980b9;
+}
+
 .btn-back {
     display: block;
     margin: 0.5rem auto;
     width: fit-content;
 }
 
-/* Floating Menu Button */
-.floating-menu-btn {
-    display: none;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1100;
-    background: #2c3e50;
-    color: white;
-    border: none;
-    font-size: 1.3rem;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.welcome-section {
-    display: none;
-}
-
 @media (max-width: 768px) {
-    .floating-menu-btn {
+    .top-bar .menu-btn {
         display: block;
     }
 }

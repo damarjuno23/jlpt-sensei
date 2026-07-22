@@ -184,16 +184,6 @@ const grammarData = [
     { id: 182, jp: 'ずつ', romaji: 'zutsu', meaning: 'masing-masing; setiap; per', page: 375 }
 ];
 
-// Floating menu button untuk mobile
-function createFloatingMenuBtn() {
-    const btn = document.createElement('button');
-    btn.className = 'floating-menu-btn';
-    btn.onclick = toggleSidebar;
-    btn.innerHTML = '☰';
-    btn.setAttribute('aria-label', 'Toggle menu');
-    document.body.appendChild(btn);
-}
-
 // Fungsi untuk generate sidebar
 function generateSidebar(currentPageId = null) {
     const homeLink = (currentPageId !== null) ? '../index.html' : 'index.html';
@@ -223,9 +213,13 @@ function generateSidebar(currentPageId = null) {
     const sidebarHTML = `
         <nav class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <h2><a href="${homeLink}" style="color: white; text-decoration: none;">N3 文法</a></h2>
-                <button class="close-btn" onclick="toggleSidebar()">✕</button>
-            </div>
+    <div class="sidebar-header">
+    <h2><a href="${homeLink}" style="color: white; text-decoration: none;">N3 文法</a></h2>
+    <button class="close-btn" onclick="toggleSidebar()">✕</button>
+</div>
+    <h2><a href="${homeLink}" style="color: white; text-decoration: none;">N3 文法</a></h2>
+    <button class="close-btn" onclick="toggleSidebar()">✕</button>
+</div>
             <div class="sidebar-search">
                 <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchGrammar()">
             </div>
@@ -239,21 +233,31 @@ function generateSidebar(currentPageId = null) {
     if (oldSidebar) oldSidebar.remove();
     
     document.body.insertAdjacentHTML('afterbegin', sidebarHTML);
+
 }
 
 // Toggle kana / romaji / arti per item
-function toggleRow(btn, type) {
-    const item = btn.closest('.example-item');
-    const row = item.querySelector(`.row-${type}`);
-    
-    row.classList.toggle('show');
-    btn.classList.toggle('active');
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+
+    if (sidebar.style.transform === "translateX(0px)" ||
+        sidebar.style.transform === "translateX(0)") {
+        sidebar.style.transform = "translateX(-100%)";
+    } else {
+        sidebar.style.transform = "translateX(0)";
+    }
 }
 
 // Sidebar Toggle
 function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) sidebar.classList.toggle('open');
+    const sidebar = document.getElementById("sidebar");
+
+    if (sidebar.style.transform === "translateX(0px)" ||
+        sidebar.style.transform === "translateX(0)") {
+        sidebar.style.transform = "translateX(-100%)";
+    } else {
+        sidebar.style.transform = "translateX(0)";
+    }
 }
 
 // Search function

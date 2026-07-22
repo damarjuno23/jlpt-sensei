@@ -1,3 +1,5 @@
+
+/* SIDEBAR */
 .sidebar {
     position: fixed;
     left: 0;
@@ -9,10 +11,12 @@
     overflow-y: auto;
     z-index: 1000;
     transition: transform 0.3s ease;
+
 }
 
+/* Header */
 .sidebar-header {
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
     background: #1a252f;
     display: flex;
     justify-content: space-between;
@@ -26,6 +30,21 @@
     font-size: 1.2rem;
 }
 
+.sidebar-header h2 a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Tombol hamburger di sidebar */
+.sidebar-header .menu-btn {
+    display: none;
+}
+
+.sidebar-header .menu-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Tombol close */
 .close-btn {
     background: none;
     border: none;
@@ -35,10 +54,11 @@
     display: none;
 }
 
+/* Search */
 .sidebar-search {
     padding: 1rem;
     position: sticky;
-    top: 70px;
+    top: 60px;
     background: #2c3e50;
     z-index: 9;
 }
@@ -58,10 +78,8 @@
     color: rgba(255,255,255,0.5);
 }
 
-.sidebar-search input:focus {
-    background: rgba(255,255,255,0.2);
-}
 
+/* Menu */
 .nav-menu {
     list-style: none;
     padding: 0;
@@ -74,6 +92,7 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .nav-link {
@@ -98,35 +117,6 @@
     border-left-color: #3498db;
 }
 
-.nav-link .grammar-number {
-    font-size: 0.8rem;
-    color: #7f8c8d;
-    margin-right: 0.5rem;
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        transform: translateX(-100%);
-    }
-    
-    .sidebar.open {
-        transform: translateX(0);
-    }
-    
-    .close-btn {
-        display: block;
-    }
-    
-    .main-content {
-        margin-left: 0 !important;
-    }
-    
-    .menu-btn {
-        display: block;
-    }
-}
-
-/* Hide grammar items when searching */
 .nav-link.hidden {
     display: none;
 }
@@ -139,3 +129,30 @@
     font-size: 0.7rem;
     margin-left: 5px;
 }
+
+.nav-link .grammar-number {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-right: 0.5rem;
+}
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0) !important;
+    }
+
+    .close-btn {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+}
+
+

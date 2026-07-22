@@ -227,7 +227,7 @@ function generateSidebar(currentPageId = null) {
                 <button class="close-btn" onclick="toggleSidebar()">✕</button>
             </div>
             <div class="sidebar-search">
-                <input type="text" id="searchInput" placeholder="Cari grammar..." onkeyup="searchGrammar()">
+                <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchGrammar()">
             </div>
             <ul class="nav-menu" id="grammarList">
                 ${grammarListHTML}
@@ -261,14 +261,39 @@ function searchGrammar() {
     const input = document.getElementById('searchInput');
     if (!input) return;
     const filter = input.value.toLowerCase();
-    const links = document.querySelectorAll('#grammarList .nav-link');
+    const groups = document.querySelectorAll('.grammar-group');
+    const sections = document.querySelectorAll('.nav-section');
     
-    links.forEach(link => {
-        const text = link.textContent.toLowerCase();
-        if (text.includes(filter)) {
-            link.classList.remove('hidden');
+    groups.forEach(group => {
+        const links = group.querySelectorAll('.nav-link');
+        let hasMatch = false;
+        
+        links.forEach(link => {
+            const text = link.textContent.toLowerCase();
+            if (filter === '' || text.includes(filter)) {
+                link.classList.remove('hidden');
+                hasMatch = true;
+            } else {
+                link.classList.add('hidden');
+            }
+        });
+        
+        // Tampilkan/sembunyikan grup
+        if (filter === '') {
+            group.style.display = 'none';
+            sections.forEach(s => {
+                const arrow = s.querySelector('.group-arrow');
+                if (arrow) arrow.textContent = '▶';
+            });
+        } else if (hasMatch) {
+            group.style.display = 'block';
+            const section = group.previousElementSibling;
+            if (section) {
+                const arrow = section.querySelector('.group-arrow');
+                if (arrow) arrow.textContent = '▼';
+            }
         } else {
-            link.classList.add('hidden');
+            group.style.display = 'none';
         }
     });
 }
@@ -295,13 +320,17 @@ function addQuizButton() {
     
     const lessonId = match[1];
     
+    // Hapus tombol quiz biru yang sudah ada
+    const existingBtn = nav.querySelector('a.nav-button[href*="quiz"]');
+    if (existingBtn) existingBtn.remove();
+    
+    // Tambah tombol quiz merah
     const quizBtn = document.createElement('a');
     quizBtn.href = `../quiz/select.html?lesson=${lessonId}`;
     quizBtn.className = 'nav-button';
     quizBtn.textContent = '📝 Quiz';
     quizBtn.style.background = '#e74c3c';
     
-    // Sisipkan di antara Prev dan Next
     const nextBtn = nav.querySelector('a:last-child');
     nav.insertBefore(quizBtn, nextBtn);
 }

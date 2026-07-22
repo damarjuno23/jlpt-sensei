@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <style>
-        .quiz-container { max-width: 700px; margin: 0 auto; }
+        .quiz-container { max-width: 700px; margin: 3.5rem auto auto; }
         .quiz-question { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .q-number { font-weight: bold; color: #2c3e50; margin-bottom: 0.8rem; }
         .q-sentence { font-size: 1.3rem; margin-bottom: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; line-height: 1.8; }
@@ -30,12 +30,13 @@
         .btn-random { display: inline-block; padding: 0.6rem 1.5rem; background: #e74c3c; color: white; border-radius: 25px; text-decoration: none; margin: 0.5rem; font-size: 0.9rem; }
         .btn-random:hover { background: #c0392b; }
         .quiz-empty { text-align: center; padding: 3rem; color: #95a5a6; font-size: 1.2rem; }
+        .main-content {margin-left: 0 !important;}
     </style>
     <script src="../app.js"></script>
 </head>
 <body>
     <div class="main-content">
-        <header class="top-bar"><h1>Multiple Choice Quiz</h1></header>
+        <header class="top-bar"><h1><a href="../index.html" style="color:white; text-decoration:none;">Multiple Choice Quiz</a></h1></header>
         <div class="content"><div class="quiz-container" id="quizContainer"></div></div>
     </div>
     <script src="quiz-mc-data.js"></script>
@@ -59,24 +60,31 @@
         }
 
         function startQuiz(){
-             wrongQuestions = [];
-            const random=getParam('random');
-            if(!random){ showGrid(); return; }
-            let filtered=[];
-            for(let k in allMCData){ filtered=filtered.concat(allMCData[k]); }
-            filtered=shuffle(filtered).slice(0,parseInt(random));
-            if(filtered.length===0){
-                document.getElementById('quizContainer').innerHTML=`<div class="quiz-empty"><p>📝 Belum ada soal.</p><a href="quiz.html" class="btn-retry btn-back">← Back</a></div>`;
-                return;
-            }
-            currentQuestions=shuffle(filtered).map(q=>({...q, options:shuffle(q.options.map((o,i)=>({text:o,orig:i})))}));
-            ci=0; score=0; answered=false; render();
+    wrongQuestions = [];
+    const random=getParam('random');
+    if(!random){ showGrid(); return; }
+    let filtered=[];
+    for(let k in allMCData){ 
+        const items = allMCData[k];
+        if(Array.isArray(items)){
+            items.forEach(q => {
+                filtered.push({...q, lessonId: parseInt(k)});
+            });
         }
+    }
+    filtered=shuffle(filtered).slice(0,parseInt(random));
+    if(filtered.length===0){
+        document.getElementById('quizContainer').innerHTML=`<div class="quiz-empty"><p>📝 Belum ada soal.</p><a href="quiz.html" class="btn-retry btn-back">← Back</a></div>`;
+        return;
+    }
+    currentQuestions=shuffle(filtered).map(q=>({...q, options:shuffle(q.options.map((o,i)=>({text:o,orig:i})))}));
+    ci=0; score=0; answered=false; render();
+}
 
         function render(){
-            const q=currentQuestions[ci];
-            document.getElementById('quizContainer').innerHTML=`<div class="quiz-question"><div class="q-number">Soal ${ci+1}/${currentQuestions.length}</div><div class="q-sentence">${q.sentence}</div><div class="quiz-options">${q.options.map((o,i)=>`<div class="quiz-option" onclick="select(${i},this)">${o.text}</div>`).join('')}</div></div>`;
-        }
+    const q=currentQuestions[ci];
+    document.getElementById('quizContainer').innerHTML=`<div class="quiz-question"><div class="q-number">Soal ${ci+1}/${currentQuestions.length} (Lesson ${q.lessonId})</div><div class="q-sentence">${q.sentence}</div><div class="quiz-options">${q.options.map((o,i)=>`<div class="quiz-option" onclick="select(${i},this)">${o.text}</div>`).join('')}</div></div>`;
+}
 
         function select(index,el){
     if(answered) return; answered=true;

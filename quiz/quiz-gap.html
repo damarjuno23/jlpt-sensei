@@ -36,7 +36,7 @@
 </head>
 <body>
     <div class="main-content">
-        <header class="top-bar"><h1>Gap Fill Quiz</h1></header>
+        <header class="top-bar"><h1><a href="../index.html" style="color:white; text-decoration:none;">Gap Fill Quiz</a></h1></header>
         <div class="content"><div class="gap-container" id="gapContainer"></div></div>
     </div>
 
@@ -46,7 +46,7 @@
         let wrongList = [];
         function getParam(p){ return new URL(window.location.href).searchParams.get(p); }
 
-        function showGrid(){
+function showGrid(){
             const totalLessons=Object.keys(allGapData).length;
             let html=`<div class="quiz-header"><h2>🧩 Gap Fill Quiz</h2>
                 <p>Pilih lesson untuk mulai kuis</p>
@@ -59,7 +59,7 @@
             document.getElementById('gapContainer').innerHTML=html;
         }
 
-        function startQuiz(){
+function startQuiz(){
             wrongList = [];
             const lessonId=getParam('lesson');
             if(!lessonId){ showGrid(); return; }
@@ -72,15 +72,22 @@
             ci=0; score=0; render();
         }
 
-        function render(){
-            const q=gapData[ci]; filled=new Array(q.answers.length).fill(null); usedOptions=[];
-            let bi=0, parts=q.sentence.split('____'), sHTML='';
-            parts.forEach((p,i)=>{ sHTML+=p; if(i<parts.length-1) sHTML+=`<span class="gap-blank" id="b${bi}" onclick="undoBlank(${bi})">____</span>`, bi++; });
-            const opts=[...q.options].sort(()=>Math.random()-0.5).map(o=>`<span class="gap-option" onclick="fillBlank(this,'${o}')">${o}</span>`).join('');
-            document.getElementById('gapContainer').innerHTML=`<div class="gap-card"><div class="gap-number">Soal ${ci+1}/${gapData.length}</div><div class="gap-sentence">${sHTML}</div><div class="gap-options">${opts}</div><div class="gap-result" id="result"></div></div>`;
-        }
+function render(){
+    const q=gapData[ci]; filled=new Array(q.answers.length).fill(null); usedOptions=[];
+    let bi=0, parts=q.sentence.split('____'), sHTML='';
+    parts.forEach((p,i)=>{ sHTML+=p; if(i<parts.length-1) sHTML+=`<span class="gap-blank" id="b${bi}" onclick="undoBlank(${bi})">____</span>`, bi++; });
+    const opts=[...q.options].sort(()=>Math.random()-0.5).map(o=>`<span class="gap-option" onclick="fillBlank(this,'${o}')">${o}</span>`).join('');
+    document.getElementById('gapContainer').innerHTML=`
+    <div class="gap-card">
+        <div class="gap-number">Soal ${ci+1}/${gapData.length}</div>
+        <div class="gap-sentence">${sHTML}</div>
+        <div class="gap-options">${opts}</div>
+        <div class="gap-result" id="result"></div>
+        <button class="btn-retry" style="background:#95a5a6;margin-top:0.5rem;" onclick="skipQuestion()">⏭</button>
+    </div>`;
+}
 
-        function fillBlank(el,v){
+function fillBlank(el,v){
             if(el.classList.contains('used')) return;
             for(let i=0;i<filled.length;i++){
                 if(filled[i]===null){
@@ -92,7 +99,7 @@
             }
         }
 
-        function undoBlank(index){
+function undoBlank(index){
             if(filled[index]===null) return;
             const v=filled[index];
             for(let i=0;i<usedOptions.length;i++){
@@ -107,60 +114,90 @@
             const rd=document.getElementById('result'); if(rd) rd.textContent='';
         }
 
-        function autoCheck(){
-            const q=gapData[ci], rd=document.getElementById('result'); let cc=0;
-            for(let i=0;i<q.answers.length;i++){
-                const b=document.getElementById('b'+i); b.style.cursor='default'; b.onclick=null;
-                if(filled[i]===q.answers[i]){ b.classList.add('correct'); cc++; }
-                else b.classList.add('wrong');
-            }
-             wrongList.push({
-        sentence: q.sentence,
-        answers: q.answers,
-        userFilled: [...filled]
-    });
-            document.querySelectorAll('.gap-option').forEach(o=>o.style.pointerEvents='none');
-            score+=cc;
-            rd.textContent=cc===q.answers.length?'✅ Benar!':`❌ ${cc}/${q.answers.length} benar`;
-            rd.className='gap-result '+(cc===q.answers.length?'correct':'wrong');
-            setTimeout(()=>{ ci++; ci<gapData.length?render():showResult(); },1500);
-        }
-
-        function showResult(){
-            
-            const p=Math.round((score/totalBlanks)*100), m=p===100?'🎉 Sempurna!':p>=80?'👍 Bagus!':'💪 Terus berlatih!';
-            document.getElementById('gapContainer').innerHTML=`<div class="gap-card" style="text-align:center;"><h2>${m}</h2><div style="font-size:2rem;font-weight:bold;color:#27ae60;padding:1rem;">${score}/${totalBlanks}</div><p>${p}% benar</p><button class="btn-retry" onclick="startQuiz()">Coba Lagi</button><a href="quiz-gap.html" class="btn-retry btn-back">📋 Semua Kuis</a></div>
-            `;
-            let reviewBtn = '';
-if(wrongList.length > 0) {
-    reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#e74c3c;">🔁 Review ${wrongList.length} Soal Salah</button>`;
+function autoCheck(){
+    const q=gapData[ci], rd=document.getElementById('result'); let cc=0;
+    for(let i=0;i<q.answers.length;i++){
+        const b=document.getElementById('b'+i); b.style.cursor='default'; b.onclick=null;
+        if(filled[i]===q.answers[i]){ b.classList.add('correct'); cc++; }
+        else b.classList.add('wrong');
+    }
+    if(cc < q.answers.length) {
+        wrongList.push({
+            sentence: q.sentence,
+            answers: q.answers,
+            userFilled: [...filled]
+        });
+    }
+    document.querySelectorAll('.gap-option').forEach(o=>o.style.pointerEvents='none');
+    score+=cc;
+    rd.textContent=cc===q.answers.length?'✅ Benar!':`❌ ${cc}/${q.answers.length} benar`;
+    rd.className='gap-result '+(cc===q.answers.length?'correct':'wrong');
+    setTimeout(()=>{ ci++; ci<gapData.length?render():showResult(); },1500);
 }
-// Di innerHTML tambahkan ${reviewBtn}
-        }
 
-        function reviewWrong() {
+function showResult(){
+    const p=Math.round((score/totalBlanks)*100), m=p===100?'🎉 Sempurna!':p>=80?'👍 Bagus!':'💪 Terus berlatih!';
+    let reviewBtn = '';
+    if(wrongList.length > 0) {
+        reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#e74c3c;">🔁 Review ${wrongList.length} Soal Salah</button>`;
+    }
+    document.getElementById('gapContainer').innerHTML=`<div class="gap-card" style="text-align:center;"><h2>${m}</h2><div style="font-size:2rem;font-weight:bold;color:#27ae60;padding:1rem;">${score}/${totalBlanks}</div><p>${p}% benar</p>
+    <button class="btn-retry" onclick="startQuiz()">Coba Lagi</button>
+    ${reviewBtn}
+    <a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a></div>`;
+}
+
+function reviewWrong() {
+    console.log('Wrong list length:', wrongList.length);
+wrongList.forEach((q, i) => {
+    console.log(`Soal ${i+1}:`, q.userFilled, 'vs', q.answers);
+});
     if(wrongList.length === 0) return;
     let html = `<div class="quiz-header"><h2>📝 Review Soal Salah</h2><p>${wrongList.length} soal</p></div>`;
     
     wrongList.forEach((q, i) => {
-        let sentenceHTML = q.sentence;
+        let userSentence = q.sentence;
+        let correctSentence = q.sentence;
+        
         q.answers.forEach((ans, j) => {
             const userAns = q.userFilled[j] || '___';
-            const isCorrect = userAns === ans;
-            const color = isCorrect ? '#27ae60' : '#e74c3c';
-            sentenceHTML = sentenceHTML.replace('____', `<strong style="color:${color}">${userAns}</strong> → <strong style="color:#27ae60">${ans}</strong>`);
+            correctSentence = correctSentence.replace('____', `<strong style="color:#27ae60">${ans}</strong>`);
+            userSentence = userSentence.replace('____', `<strong style="color:#e74c3c">${userAns}</strong>`);
         });
         
         html += `<div class="gap-card">
             <div class="q-number">Soal ${i+1}</div>
-            <div class="gap-sentence" style="line-height:2.5;">${sentenceHTML}</div>
+            <div class="gap-sentence" style="line-height:2.5;">
+                <p>❌ <strong>Jawaban kamu:</strong></p>
+                <p>${userSentence}</p>
+                <p>✅ <strong>Jawaban benar:</strong></p>
+                <p>${correctSentence}</p>
+            </div>
         </div>`;
     });
     
-    html += `<button class="btn-retry" onclick="startQuiz()">🔄 Kuis Baru</button>
-             <a href="quiz-gap.html" class="btn-retry btn-back">📋 Semua Kuis</a>`;
+    html += `<div style="text-align:center;">
+        <button class="btn-retry" onclick="startQuiz()">🔄 Kuis Baru</button>
+        <a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a>
+    </div>`;
     
     document.getElementById('gapContainer').innerHTML = html;
+}
+
+function skipQuestion() {
+    const q = gapData[ci];
+    // Tampilkan jawaban benar
+    for(let i=0;i<q.answers.length;i++){
+        document.getElementById('b'+i).textContent = q.answers[i];
+        document.getElementById('b'+i).classList.add('filled');
+        document.getElementById('b'+i).style.background = '#ffeaa7';
+        document.getElementById('b'+i).style.cursor = 'default';
+        document.getElementById('b'+i).onclick = null;
+    }
+    document.querySelectorAll('.gap-option').forEach(o=>o.style.pointerEvents='none');
+    document.getElementById('result').textContent = '⏭️ Skipped';
+    
+    setTimeout(()=>{ ci++; ci<gapData.length?render():showResult(); }, 1000);
 }
 
         startQuiz();

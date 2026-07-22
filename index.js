@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="number">#${grammar.id}</div>
                 <div class="jp">${grammar.jp}</div>
                 <div class="romaji">${grammar.romaji}</div>
-                <div class="meaning">${grammar.meaning}</div>
-                <div class="page">hal. ${grammar.page}</div>
             `;
             grid.appendChild(card);
         });

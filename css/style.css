@@ -55,66 +55,52 @@ body {
 }
 
 /* Grammar Grid */
+
+.grammar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
 .grammar-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
     background: #f0b01f;
-    border-radius: 10px;
-    padding: 0.8rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-    cursor: pointer;
-    transition: all 0.2s;
-    border-left: 2px solid white;
+    border-radius: 8px;
+    border-left: 3px solid white;
     text-decoration: none;
     color: inherit;
-    display: block;
-    text-align: center;
+    transition: all 0.2s;
+}
+
+.grammar-card:hover {
+    transform: scale(1.02);
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.grammar-card .number {
+    font-size: 0.8rem;
+    min-width: 30px;
+    color: black;
 }
 
 .grammar-card .jp {
     font-size: 1rem;
-    color: #2c3e50;
-    margin-bottom: 0.3rem;
     font-weight: bold;
+    min-width: 100px;
 }
 
 .grammar-card .romaji {
-    font-size: 0.9rem;
-    color: #880808;
-    margin-bottom: 0.2rem;
-}
-
-.grammar-card .meaning {
-    font-size: 0.9rem;
-    color: black;
-}
-
-.grammar-card .number {
-    font-size: 0.9rem;
-    color: black;
-    margin-bottom: 0.3rem;
-}
-
-.grammar-card .page {
     font-size: 0.8rem;
-    color: white;
-    margin-top: 0.5rem;
-    text-align: right;
+    color: #880808;
 }
 
-/* .grammar-card:hover {
-    transform: translateX(-4px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-} */
-
-.grammar-card:hover {
-    transform: scale(1.1);
-    z-index: 10;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-}
-
-.grammar-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 0.72rem;
+.grammar-card .meaning,
+.grammar-card .page {
+    display: none;
 }
 
 /* Lesson Page */
@@ -309,6 +295,12 @@ body {
 .toggle-btn.active {
     background: #198368;
     color: white;
+}
+
+.btn-back {
+    display: block;
+    margin: 0.5rem auto;
+    width: fit-content;
 }
 
 /* Floating Menu Button */

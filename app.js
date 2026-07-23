@@ -217,8 +217,8 @@ function generateSidebar(currentPageId = null) {
     <h2><a href="${homeLink}" style="color: white; text-decoration: none;">N3 文法</a></h2>
     <button class="close-btn" onclick="toggleSidebar()">✕</button>
 </div>
-    <h2><a href="${homeLink}" style="color: white; text-decoration: none;">N3 文法</a></h2>
-    <button class="close-btn" onclick="toggleSidebar()">✕</button>
+
+    
 </div>
             <div class="sidebar-search">
                 <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchGrammar()">
@@ -237,17 +237,13 @@ function generateSidebar(currentPageId = null) {
 }
 
 // Toggle kana / romaji / arti per item
-function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-
-    if (sidebar.style.transform === "translateX(0px)" ||
-        sidebar.style.transform === "translateX(0)") {
-        sidebar.style.transform = "translateX(-100%)";
-    } else {
-        sidebar.style.transform = "translateX(0)";
-    }
+function toggleRow(btn, type) {
+    const item = btn.closest('.example-item');
+    const row = item.querySelector(`.row-${type}`);
+    
+    row.classList.toggle('show');
+    btn.classList.toggle('active');
 }
-
 // Sidebar Toggle
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
@@ -373,4 +369,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     addQuizButton();
+});
+
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        sidebar.classList.remove('open');
+        sidebar.removeAttribute('style');
+    }
 });

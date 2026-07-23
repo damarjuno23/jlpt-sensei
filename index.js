@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('grammarGrid');
-    
     if (grid) {
         grammarData.forEach(grammar => {
             const card = document.createElement('a');
@@ -14,4 +13,5 @@ document.addEventListener('DOMContentLoaded', () => {
             grid.appendChild(card);
         });
     }
+
 });

@@ -6,27 +6,40 @@
     <title>N3 Bunpo</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- Main Content -->
     <div class="main-content">
         <header class="top-bar">
-    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-    <h1>N3 - Mojo</h1>
-</header>
+            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+            <h1>N3 - Mojo</h1>
+        </header>
 
         <div class="content">
-    <div class="home-section" style="text-align: center; padding: 2rem;">
-        <h2>Welcome ^^</h2>
-        <img src="img/logo.png" alt="Logo" style="max-width: 500px;">
-    </div>
-    <div class="grammar-list" id="grammarGrid"></div>
-</div>
+            <!-- HOME STATE -->
+            <div id="homeState" class="home-section" style="text-align: center; padding: 2rem;">
+                <h2 style="font-family: 'Nova square', cursive; font-size: 1.9rem; margin-bottom: 2rem;">
+    Welcome <span style="color: rgb(201, 162, 55);">^^</span>
+</h2>
+                <div id="logoContainer" style="cursor: pointer; display: inline-block;" onclick="showLessons(); return false;">
+                    <canvas id="logoCanvas" width="400" height="400" style="max-width: 100%;"></canvas>
+                <h1 style="font-family: 'Press Start 2P', cursive; font-size: 2rem; margin-top: 1rem; font-weight: 500;">
+    M<span style="color: #f1c40f;">o</span>j<span style="color: #f1c40f;">o</span> Studios
+</h1>
+                </h1>
+            </div>
+        </div>
+
+            <!-- LESSON STATE -->
+            <div id="lessonState" class="grammar-list" style="display: none;"></div>
+        </div>
     </div>
 
-   
     <script src="app.js"></script>
-<script src="index.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>

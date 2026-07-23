@@ -127,6 +127,17 @@ function autoCheck(){
             answers: q.answers,
             userFilled: [...filled]
         });
+        // Audio wrong
+        try {
+            const sound = new Audio('../audio/wrong.mp3');
+            sound.play();
+        } catch(e) {}
+    } else {
+        // Audio correct
+        try {
+            const sound = new Audio('../audio/correct.mp3');
+            sound.play();
+        } catch(e) {}
     }
     document.querySelectorAll('.gap-option').forEach(o=>o.style.pointerEvents='none');
     score+=cc;

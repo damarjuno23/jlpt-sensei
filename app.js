@@ -186,7 +186,7 @@ const grammarData = [
 
 // Fungsi untuk generate sidebar
 function generateSidebar(currentPageId = null) {
-    const homeLink = (currentPageId !== null) ? '../index.html' : 'index.html';
+    const homeLink = (currentPageId !== null) ? '../' : './';
     
     // Grup per 10
     let grammarListHTML = '';

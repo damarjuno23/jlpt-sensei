@@ -60,79 +60,93 @@
         }
 
         function startQuiz(){
-    wrongQuestions = [];
-    const random=getParam('random');
-    if(!random){ showGrid(); return; }
-    let filtered=[];
-    for(let k in allMCData){ 
-        const items = allMCData[k];
-        if(Array.isArray(items)){
-            items.forEach(q => {
-                filtered.push({...q, lessonId: parseInt(k)});
-            });
+            wrongQuestions = [];
+            const random=getParam('random');
+            if(!random){ showGrid(); return; }
+            let filtered=[];
+            for(let k in allMCData){ 
+                const items = allMCData[k];
+                if(Array.isArray(items)){
+                    items.forEach(q => {
+                        filtered.push({...q, lessonId: parseInt(k)});
+                    });
+                }
+            }
+            filtered=shuffle(filtered).slice(0,parseInt(random));
+            if(filtered.length===0){
+                document.getElementById('quizContainer').innerHTML=`<div class="quiz-empty"><p>📝 Belum ada soal.</p><a href="quiz.html" class="btn-retry btn-back">← Back</a></div>`;
+                return;
+            }
+            currentQuestions=shuffle(filtered).map(q=>({...q, options:shuffle(q.options.map((o,i)=>({text:o,orig:i})))}));
+            ci=0; score=0; answered=false; render();
         }
-    }
-    filtered=shuffle(filtered).slice(0,parseInt(random));
-    if(filtered.length===0){
-        document.getElementById('quizContainer').innerHTML=`<div class="quiz-empty"><p>📝 Belum ada soal.</p><a href="quiz.html" class="btn-retry btn-back">← Back</a></div>`;
-        return;
-    }
-    currentQuestions=shuffle(filtered).map(q=>({...q, options:shuffle(q.options.map((o,i)=>({text:o,orig:i})))}));
-    ci=0; score=0; answered=false; render();
-}
 
         function render(){
-    const q=currentQuestions[ci];
-    document.getElementById('quizContainer').innerHTML=`<div class="quiz-question"><div class="q-number">Soal ${ci+1}/${currentQuestions.length} (Lesson ${q.lessonId})</div><div class="q-sentence">${q.sentence}</div><div class="quiz-options">${q.options.map((o,i)=>`<div class="quiz-option" onclick="select(${i},this)">${o.text}</div>`).join('')}</div></div>`;
-}
+            const q=currentQuestions[ci];
+            document.getElementById('quizContainer').innerHTML=`<div class="quiz-question"><div class="q-number">Soal ${ci+1}/${currentQuestions.length} (Lesson ${q.lessonId})</div><div class="q-sentence">${q.sentence}</div><div class="quiz-options">${q.options.map((o,i)=>`<div class="quiz-option" onclick="select(${i},this)">${o.text}</div>`).join('')}</div></div>`;
+        }
 
         function select(index,el){
     if(answered) return; answered=true;
     const q=currentQuestions[ci];
     document.querySelectorAll('.quiz-option').forEach(o=>o.style.pointerEvents='none');
+    
     if(q.options[index].orig===q.correct){ 
         el.classList.add('correct'); 
-        score++; 
+        score++;
+        // Audio correct
+        try {
+            const sound = new Audio('../audio/correct.mp3');
+            sound.play().then(() => console.log('Correct audio played')).catch(e => console.log('Audio error:', e));
+        } catch(e) {
+            console.log('Audio exception:', e);
+        }
     } else { 
         el.classList.add('wrong'); 
         q.options.forEach((o,i)=>{ if(o.orig===q.correct) document.querySelectorAll('.quiz-option')[i].classList.add('correct'); }); 
         wrongQuestions.push({
-    sentence: q.sentence, 
-    options: q.options.map(o => o.text), // simpan sebagai array string
-    correct: q.correct,
+    sentence: q.sentence,
+    options: q.options.map(o => o.text),
+    correctText: q.options[q.correct].text,
     userAnswer: q.options[index].text
 });
+        // Audio wrong
+        try {
+            const sound = new Audio('../audio/wrong.mp3');
+            sound.play().then(() => console.log('Wrong audio played')).catch(e => console.log('Audio error:', e));
+        } catch(e) {
+            console.log('Audio exception:', e);
+        }
     }
     setTimeout(()=>{ ci++; answered=false; ci<currentQuestions.length?render():showResult(); },800);
 }
 
         function showResult(){
-    const total=currentQuestions.length, p=Math.round((score/total)*100);
-    let sc='ok', m='💪 Terus berlatih!';
-    if(p===100){ sc='perfect'; m='🎉 Sempurna!'; } else if(p>=80){ sc='good'; m='👍 Bagus!'; }
-    let reviewBtn = '';
-    if(wrongQuestions.length > 0) {
-        reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#e74c3c;">🔁 Review ${wrongQuestions.length} Soal Salah</button>`;
-    }
-    document.getElementById('quizContainer').innerHTML=`<div class="quiz-question" style="text-align:center;"><h2>${m}</h2><div class="quiz-score ${sc}">${score}/${total}</div><p>${p}% benar</p>
-    <button class="btn-retry" onclick="startQuiz()">Coba Lagi</button>
-    ${reviewBtn}
-    <a href="quiz.html" class="btn-retry btn-back">📋 Semua Kuis</a></div>`;
-}
+            const total=currentQuestions.length, p=Math.round((score/total)*100);
+            let sc='ok', m='💪 Terus berlatih!';
+            if(p===100){ sc='perfect'; m='🎉 Sempurna!'; } else if(p>=80){ sc='good'; m='👍 Bagus!'; }
+            let reviewBtn = '';
+            if(wrongQuestions.length > 0) {
+                reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#e74c3c;">🔁 Review ${wrongQuestions.length} Soal Salah</button>`;
+            }
+            document.getElementById('quizContainer').innerHTML=`<div class="quiz-question" style="text-align:center;"><h2>${m}</h2><div class="quiz-score ${sc}">${score}/${total}</div><p>${p}% benar</p>
+            <button class="btn-retry" onclick="startQuiz()">Coba Lagi</button>
+            ${reviewBtn}
+            <a href="quiz.html" class="btn-retry btn-back">📋 Semua Kuis</a></div>`;
+        }
 
         function reviewWrong() {
     if(wrongQuestions.length === 0) return;
     let html = `<div class="quiz-header"><h2>📝 Review Soal Salah</h2><p>${wrongQuestions.length} soal</p></div>`;
     
     wrongQuestions.forEach((q, i) => {
-        const correctAnswer = q.options[q.correct];
         html += `
         <div class="quiz-question">
             <div class="q-number">Soal ${i+1}</div>
             <div class="q-sentence">${q.sentence}</div>
             <div style="margin-top:0.8rem;">
                 <p>❌ Jawaban kamu: <strong style="color:#e74c3c;">${q.userAnswer}</strong></p>
-                <p>✅ Jawaban benar: <strong style="color:#27ae60;">${correctAnswer}</strong></p>
+                <p>✅ Jawaban benar: <strong style="color:#27ae60;">${q.correctText}</strong></p>
             </div>
         </div>`;
     });

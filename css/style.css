@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-    background: #95967e;
+    background: #7D929E;
     color: black;
     display: flex;
 }
@@ -139,7 +139,7 @@ body {
     color: #2c3e50;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid #9e4480;
+    border-bottom: 1px solid #2C70B7;
 }
 
 /* Usage Box */
@@ -272,19 +272,19 @@ body {
 }
 
 .nav-button {
-    padding: 0.8rem 1.5rem;
-    background: #3498db;
+    padding: 0.6rem 1.3rem;
+    background: #31728D;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.3rem;
     transition: background 0.3s;
 }
 
 .nav-button:hover {
-    background: #2980b9;
+    background: #3a809e;
 }
 
 .btn-back {
@@ -292,6 +292,8 @@ body {
     margin: 0.5rem auto;
     width: fit-content;
 }
+
+
 
 @media (max-width: 768px) {
     .top-bar .menu-btn {

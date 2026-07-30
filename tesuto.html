@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Luffy Run Test</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#6f8b97;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    height:100vh;
+    overflow:hidden;
+    font-family:Arial;
+}
+
+h2{
+    color:white;
+    margin-bottom:15px;
+}
+
+canvas{
+    border:3px solid #333;
+    background:white;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.info{
+    margin-top:15px;
+    color:white;
+    text-align:center;
+    line-height:1.6;
+}
+
+button{
+    margin-top:15px;
+    padding:10px 20px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+<body>
+
+<h2>🏃 Luffy Run Animation</h2>
+
+<canvas id="game"></canvas>
+
+<div class="info" id="info">
+Loading...
+</div>
+
+<button onclick="toggleAnimation()">Pause</button>
+
+<script>
+
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+ctx.imageSmoothingEnabled = false;
+
+const sprite = new Image();
+
+sprite.src = "img/luffy-runs.png";
+
+const FRAME_COUNT = 8;
+
+let frameWidth;
+let frameHeight;
+
+let frame = 0;
+
+let fps = 12;
+let lastTime = 0;
+
+let playing = true;
+
+sprite.onload = ()=>{
+
+    frameWidth = sprite.width / FRAME_COUNT;
+    frameHeight = sprite.height;
+
+    canvas.width = frameWidth * 3;
+    canvas.height = frameHeight * 3;
+
+    requestAnimationFrame(loop);
+
+}
+
+sprite.onerror = ()=>{
+
+    alert("Gagal memuat img/luffy-runs.png");
+
+}
+
+function loop(timestamp){
+
+    if(timestamp - lastTime > 1000 / fps){
+
+        if(playing){
+
+            frame++;
+
+            if(frame >= FRAME_COUNT){
+
+                frame = 0;
+
+            }
+
+        }
+
+        draw();
+
+        lastTime = timestamp;
+
+    }
+
+    requestAnimationFrame(loop);
+
+}
+
+function draw(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.drawImage(
+
+        sprite,
+
+        frame * frameWidth,
+        0,
+
+        frameWidth,
+        frameHeight,
+
+        0,
+        0,
+
+        canvas.width,
+        canvas.height
+
+    );
+
+    document.getElementById("info").innerHTML=
+    `
+    Sprite : ${sprite.width} × ${sprite.height}<br>
+    Frame : ${frame+1}/8<br>
+    Frame Size : ${frameWidth} × ${frameHeight}<br>
+    FPS : ${fps}
+    `;
+
+}
+
+function toggleAnimation(){
+
+    playing = !playing;
+
+    document.querySelector("button").innerText =
+        playing ? "Pause" : "Play";
+
+}
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.code==="Space"){
+
+        playing=!playing;
+
+        document.querySelector("button").innerText =
+        playing ? "Pause" : "Play";
+
+    }
+
+    if(e.key==="ArrowUp"){
+
+        fps++;
+
+    }
+
+    if(e.key==="ArrowDown"){
+
+        fps=Math.max(1,fps-1);
+
+    }
+
+    if(e.key==="ArrowRight"){
+
+        frame=(frame+1)%FRAME_COUNT;
+
+        draw();
+
+    }
+
+    if(e.key==="ArrowLeft"){
+
+        frame--;
+
+        if(frame<0) frame=FRAME_COUNT-1;
+
+        draw();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

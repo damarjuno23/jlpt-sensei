@@ -5,14 +5,14 @@ function pixelPuzzle() {
     
     const ctx = canvas.getContext('2d');
     const img = new Image();
-    img.src = 'img/logo.png';
+    img.src = 'img/logo1.png';
     
     img.onload = () => {
         const gridSize = 20; // 20x20 grid
         const pieceW = canvas.width / gridSize;
         const pieceH = canvas.height / gridSize;
         const totalPieces = gridSize * gridSize;
-        const duration = 1700; // 2 detik
+        const duration = 1200; // 2 detik
         
         // Buat array indeks 0 sampai totalPieces-1, lalu acak
         const pieces = [];
@@ -56,7 +56,7 @@ function pixelPuzzle() {
                 // Animasi selesai, ganti canvas dengan img
                 const container = document.getElementById('logoContainer');
                 const finalImg = document.createElement('img');
-                finalImg.src = 'img/logo.png';
+                finalImg.src = 'img/logo1.png';
                 finalImg.alt = 'Logo';
                 finalImg.style.maxWidth = '500px';
                 finalImg.style.width = '100%';

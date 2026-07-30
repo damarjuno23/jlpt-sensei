@@ -6,23 +6,10 @@
     <title>Gap Fill Quiz - N3 文法</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/sidebar.css">
-    <style>
-        .gap-container { max-width: 750px; margin: 0 auto; }
-        .gap-card { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .gap-number { font-weight: bold; color: #2c3e50; margin-bottom: 1rem; }
-        .gap-sentence { font-size: 1.2rem; line-height: 2.5; padding: 1rem; background: #f8f9fa; border-radius: 8px; margin-bottom: 1rem; }
-        .gap-blank { display: inline-block; min-width: 70px; margin: 0 4px; text-align: center; padding: 2px 8px; color: #3498db; font-weight: bold; background: #eaf4ff; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
-        .gap-blank.filled { color: #2c3e50; background: #dbeafe; }
-        .gap-blank.correct { background: #d5f5e3; color: #27ae60; }
-        .gap-blank.wrong { background: #fadbd8; color: #e74c3c; }
-        .gap-options { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; justify-content: center; }
-        .gap-option { padding: 8px 20px; border: 2px solid #3498db; border-radius: 20px; cursor: pointer; background: white; font-size: 1rem; transition: all 0.2s; }
-        .gap-option:hover { background: #eaf4ff; }
-        .gap-option.used { opacity: 0.3; pointer-events: none; text-decoration: line-through; }
-        .gap-result { text-align: center; font-size: 1.1rem; margin-top: 0.8rem; font-weight: bold; }
-        .gap-result.correct { color: #27ae60; } .gap-result.wrong { color: #e74c3c; }
-        .btn-retry { display: block; margin: 1rem auto; padding: 0.8rem 2rem; background: #2c3e50; color: white; border: none; border-radius: 25px; font-size: 1rem; cursor: pointer; }
-        .btn-back { background: #95a5a6; text-decoration: none; display: inline-block; text-align: center; }
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <style>
+        .gap-container {max-width: 868px; margin: 0 auto; padding: 0 1rem;}
         .quiz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.6rem; }
         .quiz-card { background: white; border-radius: 10px; padding: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.06); cursor: pointer; text-decoration: none; color: inherit; text-align: center; transition: all 0.2s; border-top: 3px solid #27ae60; }
         .quiz-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
@@ -31,15 +18,243 @@
         .quiz-header { text-align: center; margin-bottom: 1.5rem; }
         .quiz-header h2 { margin-bottom: 0.5rem; }
         .gap-empty { text-align: center; padding: 3rem; color: #95a5a6; font-size: 1.2rem; }
+        .content { padding-top: 8rem;}
+        .top-bar {
+    width: 100%;
+    margin: 0;
+    padding: 1rem 2rem;
+}
+.main-content {
+    margin-left: 0 !important;
+}
+
+* {
+    image-rendering: pixelated;
+}
+
+/* Background cerah */
+body {
+    background: #7D929E;
+}
+
+
+.gap-card {
+    background: linear-gradient(180deg, #ffffff, #e8f0f8);
+    /* border: 3px solid #F6F1E7; */
+    border: 3px solid #DCB4BC;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 
+    0 4px 15px rgba(88,62,70,0.2),
+    0 8px 0 #583E46;
+    position: relative;
+    color: #583E46;
+}
+/* Label di atas */
+.gap-card::before {
+    content: '✧ 文法 ✧';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #F3AD16;
+    color: black;
+    padding: 6px 24px;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+/* Nomor soal */
+.gap-number {
+    font-weight: bold;
+    color: #583E46;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+/* Teks soal */
+.gap-sentence {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    padding: 1rem;
+    background: #ffffff;
+    border: 1px solid #78909C;
+    border-radius: 10px;
+    color: black;
+    font-weight: 400;
+}
+/* Gap slot */
+.gap-blank {
+    display: inline-block;
+    min-width: 70px;
+    margin: 0 4px;
+    text-align: center;
+    padding: 6px 14px;
+    color: #583E46;
+    font-weight: 400;
+    background: #81959e;
+    border: 1px dashed #583E46;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gap-blank.filled {
+    background: #FFE772;
+    border: 0.5px solid black;
+    color: #583E46;
+}
+.gap-blank.correct {
+    background: #9DC209;
+    border-color: #4CAF50;
+    color: #2E7D32;
+    box-shadow: 0 0 15px rgba(76,175,80,0.4);
+}
+.gap-blank.wrong {
+    background: #FFCDD2;
+    border-color: #FF6B53;
+    color: #FF6B53;
+    box-shadow: 0 0 15px rgba(244,67,54,0.4);
+}
+/* Batu pilihan */
+.gap-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 1.5rem 0;
+    justify-content: center;
+}
+.gap-option {
+    padding: 12px 24px;
+    border: 1px solid #583E46;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #DEE5C0;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 400;
+    box-shadow: 
+    0 4px 0 #DEE5C0,
+    0 6px 10px rgba(38, 46, 53, 0.15);
+    transition: all 0.2s;
+}
+.gap-option:hover {
+    background: #d5dbba;
+    border-color: #6F8C9C;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 0 #6F8C9C,
+        0 6px 10px rgba(38, 46, 53, 0.15);
+}
+.gap-option:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #583E46;
+}
+.gap-option.used {
+    opacity: 0.55;
+    pointer-events: none;
+    background: #AD781B;
+    color: black;
+}
+/* Result */
+.gap-result {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+    font-weight: bold;
+}
+.gap-result.correct { color: #00FF7F; }
+.gap-result.wrong { color: #FF6B53; }
+
+/* Tombol */
+.btn-retry {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(180deg, #78909C, #546E7A);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #78909C;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+}
+.btn-retry:hover {
+    background: linear-gradient(180deg, #B5D2CE, #B5D2CE);
+}
+.btn-back {
+    background: linear-gradient(180deg, #78909C, #546E7A);
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 4px 0 #37474F;
+}
+
+/* Header */
+.top-bar {
+    background: #6F8C9C !important;
+    border-bottom: 1px solid #ffffff;
+    
+}
+
+/* Track karakter */
+.stairs-track {
+    max-width: 750px;
+    height: 80px;
+    position: relative;
+    margin: 4rem auto 1rem;
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+    border: 1px solid #78909C;
+    overflow: visible;
+}
+.progress-bar {
+    height: 100%;
+    background: #74C365;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+.character-runner {
+    position: absolute;
+    left: 0;
+    top: -50px;
+    font-size: 3rem;
+    transition: left 0.8s ease;
+    transform: translateX(-50%);
+}
+.door-icon {
+    position: absolute;
+    right: -10px;
+    top: -55px;
+    font-size: 3.5rem;
+}
+.track-label {
+    position: absolute;
+    top: -25px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #583E46;
+}
+.track-label.start { left: 0; }
+.track-label.finish { right: 0; }
+
+
     </style>
     <script src="../app.js"></script>
 </head>
 <body>
-    <div class="main-content">
-        <header class="top-bar"><h1><a href="../index.html" style="color:white; text-decoration:none;">Gap Fill Quiz</a></h1></header>
-        <div class="content"><div class="gap-container" id="gapContainer"></div></div>
+     <div class="main-content">
+    <header class="top-bar"><h1><a href="../index.html" style="color:white; text-decoration:none;">Gap Fill Quiz</a></h1></header>
+    <div class="content">
+        <div class="gap-container" id="gapContainer"></div>
     </div>
-
+</div>
     <script src="quiz-gap-data.js"></script>
     <script>
         let gapData=[], ci=0, score=0, totalBlanks=0, filled=[], usedOptions=[];
@@ -83,7 +298,9 @@ function render(){
         <div class="gap-sentence">${sHTML}</div>
         <div class="gap-options">${opts}</div>
         <div class="gap-result" id="result"></div>
-        <button class="btn-retry" style="background:#95a5a6;margin-top:0.5rem;" onclick="skipQuestion()">⏭</button>
+        <button class="btn-retry" style="background:#F3AD16;margin-top:0.5rem;color:#1a1a1a;" onclick="skipQuestion()">
+    <i class="fa-solid fa-forward"></i> 
+</button>
     </div>`;
 }
 
@@ -127,33 +344,56 @@ function autoCheck(){
             answers: q.answers,
             userFilled: [...filled]
         });
-        // Audio wrong
         try {
             const sound = new Audio('../audio/wrong.mp3');
             sound.play();
         } catch(e) {}
     } else {
-        // Audio correct
         try {
             const sound = new Audio('../audio/correct.mp3');
             sound.play();
         } catch(e) {}
     }
+    
     document.querySelectorAll('.gap-option').forEach(o=>o.style.pointerEvents='none');
     score+=cc;
-    rd.textContent=cc===q.answers.length?'✅ Benar!':`❌ ${cc}/${q.answers.length} benar`;
+    rd.innerHTML = cc === q.answers.length 
+    ? '<img src="../img/correct-icon.png" style="width:28px;vertical-align:middle;margin-right:4px;"> Benar!' 
+    : '<img src="../img/wrong-icon.png" style="width:28px;vertical-align:middle;margin-right:4px;"> ' + cc + '/' + q.answers.length + ' benar';
     rd.className='gap-result '+(cc===q.answers.length?'correct':'wrong');
-    setTimeout(()=>{ ci++; ci<gapData.length?render():showResult(); },1500);
+    setTimeout(()=>{ ci++; ci<gapData.length?render():showResult(); },2300);
+
+    const progress = (ci + 1) / gapData.length * 100;
+document.querySelector('.progress-bar').style.width = progress + '%';
+document.querySelector('.character-runner').style.left = `calc(${progress}% - 20px)`;
+
+if (progress >= 100) {
+    document.getElementById('finalDoor').innerHTML = '<span>✨🚪✨</span>';
+}
 }
 
 function showResult(){
+    const lessonId = getParam('lesson');
     const p=Math.round((score/totalBlanks)*100), m=p===100?'🎉 Sempurna!':p>=80?'👍 Bagus!':'💪 Terus berlatih!';
     let reviewBtn = '';
     if(wrongList.length > 0) {
-        reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#e74c3c;">🔁 Review ${wrongList.length} Soal Salah</button>`;
+        reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#FAFFA4; color: #000000;">🔁 Review ${wrongList.length}</button>`;
     }
+    
+    let actionBtn = '';
+    if(wrongList.length === 0 && lessonId) {
+        const nextId = parseInt(lessonId) + 1;
+        if(allGapData[nextId]) {
+            actionBtn = `<a href="quiz-gap.html?lesson=${nextId}" class="btn-retry" style="background:#27ae60;">Next Lesson →</a>`;
+        } else {
+            actionBtn = `<a href="quiz-gap.html" class="btn-retry" style="background:#27ae60;">📋 Semua Kuis</a>`;
+        }
+    } else {
+        actionBtn = `<button class="btn-retry" onclick="startQuiz()">Coba Lagi</button>`;
+    }
+    
     document.getElementById('gapContainer').innerHTML=`<div class="gap-card" style="text-align:center;"><h2>${m}</h2><div style="font-size:2rem;font-weight:bold;color:#27ae60;padding:1rem;">${score}/${totalBlanks}</div><p>${p}% benar</p>
-    <button class="btn-retry" onclick="startQuiz()">Coba Lagi</button>
+    ${actionBtn}
     ${reviewBtn}
     <a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a></div>`;
 }
@@ -164,7 +404,14 @@ wrongList.forEach((q, i) => {
     console.log(`Soal ${i+1}:`, q.userFilled, 'vs', q.answers);
 });
     if(wrongList.length === 0) return;
-    let html = `<div class="quiz-header"><h2>📝 Review Soal Salah</h2><p>${wrongList.length} soal</p></div>`;
+    
+    const lessonId = getParam('lesson');
+    const nextLessonId = parseInt(lessonId) + 1;
+    const nextLink = allGapData[nextLessonId] 
+        ? `<a href="quiz-gap.html?lesson=${nextLessonId}" class="btn-retry">Next Lesson →</a>`
+        : `<a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a>`;
+    
+    let html = `<div class="quiz-header"><h2>📝 Review</h2><p>${wrongList.length} soal</p></div>`;
     
     wrongList.forEach((q, i) => {
         let userSentence = q.sentence;
@@ -179,20 +426,38 @@ wrongList.forEach((q, i) => {
         html += `<div class="gap-card">
             <div class="q-number">Soal ${i+1}</div>
             <div class="gap-sentence" style="line-height:2.5;">
-                <p>❌ <strong>Jawaban kamu:</strong></p>
+                <p><img src="../img/wrong-icon.png" style="width:24px;vertical-align:middle;"> <strong>Jawaban kamu:</strong></p>
                 <p>${userSentence}</p>
-                <p>✅ <strong>Jawaban benar:</strong></p>
+                <p><img src="../img/correct-icon.png" style="width:24px;vertical-align:middle;"> <strong>Jawaban benar:</strong></p>
                 <p>${correctSentence}</p>
             </div>
         </div>`;
     });
     
     html += `<div style="text-align:center;">
-        <button class="btn-retry" onclick="startQuiz()">🔄 Kuis Baru</button>
-        <a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a>
-    </div>`;
+    ${nextLink}
+    <button class="btn-retry" onclick="retryWrong()" style="background:#78909C; margin-top:0.5rem;">🔄 Coba Lagi (${wrongList.length} Soal)</button>
+    <a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a>
+</div>`;
     
     document.getElementById('gapContainer').innerHTML = html;
+}
+
+function retryWrong() {
+    // Simpan soal salah, generate ulang opsi dari aslinya
+    const wrongSentences = wrongList.map(w => w.sentence);
+    const lessonId = getParam('lesson');
+    
+    // Ambil ulang dari allGapData
+    const allQuestions = allGapData[lessonId];
+    gapData = allQuestions.filter(q => wrongSentences.includes(q.sentence));
+    
+    wrongList = [];
+    totalBlanks = 0;
+    gapData.forEach(q => totalBlanks += q.answers.length);
+    ci = 0;
+    score = 0;
+    render();
 }
 
 function skipQuestion() {
@@ -206,10 +471,22 @@ function skipQuestion() {
         document.getElementById('b'+i).onclick = null;
     }
     document.querySelectorAll('.gap-option').forEach(o=>o.style.pointerEvents='none');
-    document.getElementById('result').textContent = '⏭️ Skipped';
-    
-    setTimeout(()=>{ ci++; ci<gapData.length?render():showResult(); }, 1000);
+    setTimeout(()=>{ ci++; ci<gapData.length?render():showResult(); }, 2000);
 }
+
+
+
+
+// Den Den Mushi random sound
+const dendenSound = new Audio('../audio/denden.mp3');
+dendenSound.volume = 0.25;
+function randomDenden() {
+    dendenSound.currentTime = 0;
+    dendenSound.play();
+    const next = Math.random() * 7000 + 5000;
+    setTimeout(randomDenden, next);
+}
+setTimeout(randomDenden, 2000);
 
         startQuiz();
     </script>

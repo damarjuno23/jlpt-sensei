@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanji Quiz - N3 読解</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .kanji-container {max-width: 700px; margin: 0 auto; padding: 0 1rem;}
+        .content { padding-top: 8rem;}
+        .top-bar { width: 100%; margin: 0; padding: 1rem 2rem; }
+        .main-content { margin-left: 0 !important; }
+        body { background: #7D929E; }
+
+        .kanji-card {
+            background: linear-gradient(180deg, #ffffff, #e8f0f8);
+            border: 3px solid #DCB4BC;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(88,62,70,0.2), 0 8px 0 #583E46;
+            position: relative;
+            color: #583E46;
+        }
+        .kanji-card::before {
+            content: '✧ 漢字 ✧';
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #F3AD16;
+            color: black;
+            padding: 6px 24px;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .kanji-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 1.5rem 0;
+        }
+        .kanji-option {
+            padding: 16px 24px;
+            border: 1px solid #583E46;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #DEE5C0;
+            color: black;
+            font-size: 1.3rem;
+            text-align: center;
+            box-shadow: 0 4px 0 #DEE5C0, 0 6px 10px rgba(38,46,53,0.15);
+            transition: all 0.2s;
+        }
+        .kanji-option:hover {
+            background: #d5dbba;
+            border-color: #6F8C9C;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #6F8C9C, 0 6px 10px rgba(38,46,53,0.15);
+        }
+        .kanji-option:active { transform: translateY(2px); box-shadow: 0 2px 0 #583E46; }
+        .kanji-option.correct { background: #9DC209; border-color: #4CAF50; color: #2E7D32; pointer-events: none; }
+        .kanji-option.wrong { background: #FFCDD2; border-color: #FF6B53; color: #FF6B53; pointer-events: none; }
+        
+        .kanji-result {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 0.8rem;
+            font-weight: bold;
+        }
+        .kanji-result.correct { color: #00FF7F; }
+        .kanji-result.wrong { color: #FF6B53; }
+
+        .kanji-meaning {
+            text-align: center;
+            font-size: 1rem;
+            color: #583E46;
+            margin-top: 0.5rem;
+        }
+
+        .kanji-sentence {
+    font-size: 1.2rem;
+    line-height: 2;
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #78909C;
+    border-radius: 10px;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.kanji-sentence u {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: #F3AD16;
+    text-decoration-thickness: 2px;
+}
+
+.kanji-question {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #583E46;
+    margin-bottom: 1rem;
+}
+.kanji-question strong {
+    font-size: 1.5rem;
+    color: #1a237e;
+}
+
+.quiz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.6rem; }
+.quiz-card { background: white; border-radius: 10px; padding: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.06); cursor: pointer; text-decoration: none; color: inherit; text-align: center; transition: all 0.2s; border-top: 3px solid #F3AD16; }
+.quiz-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.quiz-card .qc-num { font-size: 0.8rem; color: #7f8c8d; }
+.quiz-card .qc-title { font-size: 0.9rem; font-weight: bold; color: #2c3e50; }
+.quiz-header { text-align: center; margin-bottom: 1.5rem; }
+.quiz-header h2 { margin-bottom: 0.5rem; }
+
+        .btn-retry {
+            display: block;
+            margin: 1rem auto;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(180deg, #78909C, #546E7A);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #78909C;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+        .btn-retry:hover { background: linear-gradient(180deg, #B5D2CE, #B5D2CE); }
+        .btn-back {
+            background: linear-gradient(180deg, #78909C, #546E7A);
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 0 #37474F;
+        }
+
+        .top-bar { background: #6F8C9C !important; border-bottom: 1px solid #ffffff; }
+
+        .progress-track {
+            max-width: 700px;
+            height: 16px;
+            margin: 2rem auto 1rem;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            border: 1px solid #78909C;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #74C365;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .kanji-number {
+    font-weight: bold;
+    color: #583E46;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+    </style>
+    <script src="../app.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <header class="top-bar"><h1><a href="../index.html" style="color:white; text-decoration:none;">漢字 Quiz</a></h1></header>
+        <div class="content">
+            <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="kanji-container" id="kanjiContainer"></div>
+        </div>
+    </div>
+    <script src="quiz-kanji-data.js"></script>
+    <script>
+        let questions = [], ci = 0, score = 0, answered = false;
+        let wrongList = [];
+
+        function shuffle(arr) { const a = [...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+        function startQuiz() {
+    wrongList = [];
+    const lessonId = getParam('lesson');
+    
+    // Kalau gak ada lesson, tampilkan grid
+    if (!lessonId) {
+        showGrid();
+        return;
+    }
+    
+    const lessonNum = parseInt(lessonId);
+    const start = (lessonNum - 1) * 4;
+    const end = start + 4;
+    
+    if (!kanjiData[start]) {
+        document.getElementById('kanjiContainer').innerHTML = `
+            <div class="gap-empty"><p>📝 Belum ada soal.</p>
+            <a href="quiz-kanji.html" class="btn-retry btn-back">← Back</a></div>`;
+        return;
+    }
+    
+    questions = kanjiData.slice(start, end);
+    ci = 0; score = 0; answered = false;
+    document.getElementById('progressBar').style.width = '0%';
+    render();
+}
+
+function showGrid() {
+    const totalLessons = Math.ceil(kanjiData.length / 4);
+    let html = `<div class="quiz-header"><h2>漢字 Quiz</h2>
+        <p>Pilih lesson untuk mulai kuis</p>
+        <a href="../index.html" class="btn-retry btn-back" style="display:inline-block;">← Home</a>
+        </div><div class="quiz-grid">`;
+    for (let i = 1; i <= totalLessons; i++) {
+        html += `<a href="quiz-kanji.html?lesson=${i}" class="quiz-card">
+            <div class="qc-num">#${i}</div>
+            <div class="qc-title">Kanji ${i}</div>
+        </a>`;
+    }
+    html += `</div>`;
+    document.getElementById('kanjiContainer').innerHTML = html;
+}
+
+        function render() {
+    const q = questions[ci];
+    const originalIndex = kanjiData.findIndex(k => k.word === q.word) + 1;
+    answered = false;
+    
+    // Acak options
+    const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+    
+    document.getElementById('kanjiContainer').innerHTML = `
+        <div class="kanji-card">
+            <div class="kanji-number">Kanji #${originalIndex} — Soal ${ci + 1}/${questions.length}</div>
+            <div class="kanji-sentence">${q.sentence}</div>
+            <div class="kanji-options">
+                ${shuffledOptions.map((opt, i) => `
+                    <div class="kanji-option" onclick="selectAnswer('${opt}', this)">${opt}</div>
+                `).join('')}
+            </div>
+            <div class="kanji-result" id="result"></div>
+            <div class="kanji-meaning" id="meaning"></div>
+        </div>
+    `;
+}
+
+        function selectAnswer(opt, el) {
+    if (answered) return;
+    answered = true;
+    const q = questions[ci];
+    const options = document.querySelectorAll('.kanji-option');
+    options.forEach(o => o.style.pointerEvents = 'none');
+
+    if (opt === q.reading) {
+        el.classList.add('correct');
+        score++;
+        document.getElementById('result').innerHTML = '<img src="../img/correct-icon.png" style="width:28px;"> 正解！';
+        document.getElementById('result').className = 'kanji-result correct';
+        try { new Audio('../audio/correct.mp3').play(); } catch(e) {}
+    } else {
+        el.classList.add('wrong');
+        options.forEach(o => { if (o.textContent === q.reading) o.classList.add('correct'); });
+        wrongList.push(q);
+        document.getElementById('result').innerHTML = '<img src="../img/wrong-icon.png" style="width:28px;"> 残念';
+        document.getElementById('result').className = 'kanji-result wrong';
+        try { new Audio('../audio/wrong.mp3').play(); } catch(e) {}
+    }
+    document.getElementById('meaning').textContent = `${q.reading} — ${q.meaning}`;
+
+    const progress = (ci + 1) / questions.length * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+
+    setTimeout(() => {
+        ci++;
+        if (ci < questions.length) render();
+        else showResult();
+    }, 2500);
+}
+
+        function showResult() {
+    const lessonId = getParam('lesson');
+    const total = questions.length;
+    const p = Math.round((score / total) * 100);
+    const m = p === 100 ? '🎉 Sempurna!' : p >= 50 ? '👍 Bagus!' : '💪 Terus berlatih!';
+    
+    let nextBtn = '';
+    if (lessonId) {
+        const nextId = parseInt(lessonId) + 1;
+        const totalLessons = Math.ceil(kanjiData.length / 4);
+        if (nextId <= totalLessons) {
+            nextBtn = `<a href="quiz-kanji.html?lesson=${nextId}" class="btn-retry" style="background:#27ae60;">Next Lesson →</a>`;
+        }
+    }
+    
+    let reviewBtn = '';
+    let retryBtn = '';
+    if (wrongList.length > 0) {
+        reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#FAFFA4; color:#000;">🔁 Review ${wrongList.length}</button>`;
+    }
+
+    document.getElementById('kanjiContainer').innerHTML = `
+        <div class="kanji-card" style="text-align:center;">
+            <h2>${m}</h2>
+            <div style="font-size:2rem;font-weight:bold;color:#27ae60;padding:1rem;">${score}/${total}</div>
+            <p>${p}% benar</p>
+            ${nextBtn}
+            ${retryBtn}
+            ${reviewBtn}
+            <a href="quiz-kanji.html" class="btn-retry btn-back">📋 Semua Kuis</a>
+        </div>
+    `;
+}
+
+        function reviewWrong() {
+    if (wrongList.length === 0) return;
+    
+    const lessonId = getParam('lesson');
+    const nextLessonId = parseInt(lessonId) + 1;
+    const totalLessons = Math.ceil(kanjiData.length / 4);
+    const nextLink = (nextLessonId <= totalLessons)
+        ? `<a href="quiz-kanji.html?lesson=${nextLessonId}" class="btn-retry">Next Lesson →</a>`
+        : `<a href="quiz-kanji.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a>`;
+    
+    let html = `<div class="quiz-header"><h2>📝 Review</h2><p>${wrongList.length} soal</p></div>`;
+    
+    wrongList.forEach((q, i) => {
+        html += `
+        <div class="kanji-card">
+            <div class="kanji-sentence" style="line-height:2.5;">
+                <p>${q.sentence}</p>
+                <p>✅ <strong>${q.reading}</strong> — ${q.meaning}</p>
+            </div>
+        </div>`;
+    });
+    
+    html += `<div style="text-align:center;">
+        ${nextLink}
+        <button class="btn-retry" onclick="retryWrong()" style="background:#78909C; margin-top:0.5rem;">🔄 Coba Lagi (${wrongList.length} Soal)</button>
+        <a href="quiz-kanji.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a>
+    </div>`;
+    
+    document.getElementById('kanjiContainer').innerHTML = html;
+}
+
+        function retryWrong() {
+    questions = [...wrongList];
+    wrongList = [];
+    ci = 0;
+    score = 0;
+    answered = false;
+    document.getElementById('progressBar').style.width = '0%';
+    render();
+}
+        function getParam(p) { 
+    return new URL(window.location.href).searchParams.get(p); 
+}
+console.log(kanjiData.length);
+        startQuiz();
+    </script>
+</body>
+</html>

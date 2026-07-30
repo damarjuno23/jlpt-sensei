@@ -135,7 +135,11 @@
     color: #7f8c8d;
     margin-right: 0.5rem;
 }
-
+/* 
+.main-content {
+    margin-left: 0 !important;
+    padding: 1rem;
+} */
 
 @media (max-width: 768px) {
     .sidebar {

@@ -7,14 +7,79 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <style>
-        .select-container { max-width: 500px; margin: 3rem auto; text-align: center; }
-        .select-card { background: white; border-radius: 12px; padding: 2rem; margin: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; text-decoration: none; display: block; transition: all 0.3s; border-top: 4px solid #3498db; }
-        .select-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
-        .select-card.mc { border-top-color: #e74c3c; }
-        .select-card.gap { border-top-color: #27ae60; }
-        .select-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .select-card .emoji { font-size: 2.5rem; }
-        .select-card p { color: #7f8c8d; }
+        .select-container {
+    max-width: 1300px;
+    margin: 3rem auto;
+    text-align: center;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.select-card {
+    background: white;
+    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    height: 120px;
+    width: 400px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    border-top: 4px solid #3498db;
+}
+.select-card.mc { border-top-color: #e74c3c; }
+.select-card.gap { border-top-color: #27ae60; }
+.select-card.kanji { border-top-color: #F3AD16; }
+.select-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.select-card .emoji { font-size: 2rem; }
+.select-card p { color: #7f8c8d; font-size: 0.85rem; }
+.select-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+        .top-bar {
+    width: 100%;
+    margin: 0;
+    padding: 1rem 2rem;
+}
+.main-content {
+    margin-left: 0 !important;
+}
+
+
+body {
+    position: relative;
+    background: #7D929E;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/jolly.avif');
+    background-size: 600px;
+    background-position: center 70%;
+    background-repeat: no-repeat;
+    z-index: -1;
+    transform-origin: center 90%;
+    animation: flagWave3D 2.5s ease-in-out infinite;
+}
+
+#burstCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
     </style>
     <script src="../app.js"></script>
 </head>
@@ -31,18 +96,24 @@
         const prefix = lessonId ? `?lesson=${lessonId}` : '';
 
         document.getElementById('selectContainer').innerHTML = `
-            <a href="quiz.html?random=5" class="select-card mc">
-                <div class="emoji">🎯</div>
-                <h3>Multiple Choice</h3>
-                <p>Pilih jawaban yang benar dari 4 opsi</p>
-            </a>
-            <a href="quiz-gap.html${prefix}" class="select-card gap">
-                <div class="emoji">🧩</div>
-                <h3>Gap Fill</h3>
-                <p>Susun kata di dalam kalimat</p>
-            </a>
-            <a href="../index.html" style="color:#7f8c8d; text-decoration:none; display:inline-block; margin-top:1rem;">← Kembali</a>
-        `;
-    </script>
+    <a href="quiz.html?random=5" class="select-card mc">
+        <div class="emoji">🎯</div>
+        <h3>Multiple Choice</h3>
+        <p>Pilih Kanji</p>
+    </a>
+    <a href="quiz-gap.html${prefix}" class="select-card gap">
+        <div class="emoji">🧩</div>
+        <h3>Gap Fill</h3>
+        <p>Susun kata</p>
+    </a>
+    <a href="quiz-kanji.html" class="select-card mc" style="border-top-color: #F3AD16;">
+        <div class="emoji">漢</div>
+        <h3>Kanji Quiz</h3>
+        <p>Tebak kanji N3</p>
+    </a>
+`;
+
+
+</script>
 </body>
 </html>

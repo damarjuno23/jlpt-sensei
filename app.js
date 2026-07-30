@@ -1,4 +1,12 @@
-// Data Grammar lengkap N3
+// Tambah Font Awesome ke semua halaman
+(function() {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
+    document.head.appendChild(link);
+})();
+
+
 const grammarData = [
     { id: 1, jp: '上げる', romaji: 'ageru', meaning: 'selesai melakukan-', page: 8 },
     { id: 2, jp: 'あまり', romaji: 'amari', meaning: 'begitu... sampai', page: 10 },
@@ -328,7 +336,7 @@ function addQuizButton() {
     const quizBtn = document.createElement('a');
     quizBtn.href = `../quiz/select.html?lesson=${lessonId}`;
     quizBtn.className = 'nav-button';
-    quizBtn.textContent = '📝 Quiz';
+    quizBtn.innerHTML = '<i class="fa-solid fa-puzzle-piece"></i> Quiz';
     quizBtn.style.background = '#e74c3c';
     
     const nextBtn = nav.querySelector('a:last-child');
@@ -369,11 +377,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     addQuizButton();
+    document.querySelectorAll('.nav-button').forEach(btn => {
+        if (btn.textContent.includes('Next')) {
+            btn.innerHTML = '<i class="fa-solid fa-circle-chevron-right"></i>';
+        }
+        if (btn.textContent.includes('Prev')) {
+            btn.innerHTML = '<i class="fa-solid fa-circle-chevron-left"></i>';
+        }
+    });
 });
 
-window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-        sidebar.classList.remove('open');
-        sidebar.removeAttribute('style');
-    }
-});

@@ -127,7 +127,7 @@
             if(p===100){ sc='perfect'; m='🎉 Sempurna!'; } else if(p>=80){ sc='good'; m='👍 Bagus!'; }
             let reviewBtn = '';
             if(wrongQuestions.length > 0) {
-                reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#e74c3c;">🔁 Review ${wrongQuestions.length} Soal Salah</button>`;
+                reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#e74c3c;">🔁 Review ${wrongQuestions.length}</button>`;
             }
             document.getElementById('quizContainer').innerHTML=`<div class="quiz-question" style="text-align:center;"><h2>${m}</h2><div class="quiz-score ${sc}">${score}/${total}</div><p>${p}% benar</p>
             <button class="btn-retry" onclick="startQuiz()">Coba Lagi</button>
@@ -137,7 +137,7 @@
 
         function reviewWrong() {
     if(wrongQuestions.length === 0) return;
-    let html = `<div class="quiz-header"><h2>📝 Review Soal Salah</h2><p>${wrongQuestions.length} soal</p></div>`;
+    let html = `<div class="quiz-header"><h2>📝 Review</h2><p>${wrongQuestions.length} soal</p></div>`;
     
     wrongQuestions.forEach((q, i) => {
         html += `

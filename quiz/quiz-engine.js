@@ -31,7 +31,7 @@ function startQuiz() {
     if (filtered.length === 0) {
         document.getElementById('quizContainer').innerHTML = `
             <div class="quiz-empty">
-                <p>📝 Belum ada soal untuk lesson ini.</p>
+                <p>No questions available.</p>
                 <a href="../index.html" class="btn-retry btn-back">← Home</a>
             </div>
         `;
@@ -52,7 +52,7 @@ function renderQuestion() {
     
     container.innerHTML = `
         <div class="quiz-question">
-            <div class="q-number">Soal ${currentIndex + 1} / ${currentQuestions.length}</div>
+            <div class="q-number">Question ${currentIndex + 1} / ${currentQuestions.length}</div>
             <div class="q-sentence">${sentenceHTML}</div>
             <div class="quiz-options">
                 ${q.options.map((opt, i) => `

@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <style>
-        .quiz-container { max-width: 700px; margin: 3.5rem auto auto; }
+        .quiz-container { 
+    max-width: 700px; 
+    margin: 10rem auto auto; 
+}
         .quiz-question { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .q-number { font-weight: bold; color: #2c3e50; margin-bottom: 0.8rem; }
         .q-sentence { font-size: 1.3rem; margin-bottom: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; line-height: 1.8; }
@@ -19,7 +22,6 @@
         .quiz-score { text-align: center; font-size: 1.5rem; font-weight: bold; padding: 1.5rem; }
         .quiz-score.perfect { color: #27ae60; } .quiz-score.good { color: #3498db; } .quiz-score.ok { color: #f39c12; }
         .btn-retry { display: block; margin: 1rem auto; padding: 0.8rem 2rem; background: #2c3e50; color: white; border: none; border-radius: 25px; font-size: 1rem; cursor: pointer; }
-        .btn-back { background: #95a5a6; text-decoration: none; display: inline-block; text-align: center; }
         .quiz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.6rem; }
         .quiz-card { background: white; border-radius: 10px; padding: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.06); cursor: pointer; text-decoration: none; color: inherit; text-align: center; transition: all 0.2s; border-top: 3px solid #e74c3c; }
         .quiz-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
@@ -31,6 +33,14 @@
         .btn-random:hover { background: #c0392b; }
         .quiz-empty { text-align: center; padding: 3rem; color: #95a5a6; font-size: 1.2rem; }
         .main-content {margin-left: 0 !important;}
+        .btn-back {
+    background: #95a5a6;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin: 1rem auto;
+    width: fit-content;
+}
     </style>
     <script src="../app.js"></script>
 </head>
@@ -48,8 +58,8 @@
 
         function showGrid(){
             const totalLessons=Object.keys(allMCData).length;
-            let html=`<div class="quiz-header"><h2>📝 Multiple Choice Quiz</h2>
-                <a href="quiz.html?random=5" class="btn-random">🎲 Random 5 Soal</a>
+            let html=`<div class="quiz-header"><h2>Multiple Choice Quiz</h2>
+                <a href="quiz.html?random=5" class="btn-random">Random 5 Question</a>
                 <a href="../index.html" class="btn-retry btn-back" style="display:inline-block;">← Home</a>
                 </div><div class="quiz-grid">`;
             for(let i=1;i<=totalLessons;i++){
@@ -74,16 +84,20 @@
             }
             filtered=shuffle(filtered).slice(0,parseInt(random));
             if(filtered.length===0){
-                document.getElementById('quizContainer').innerHTML=`<div class="quiz-empty"><p>📝 Belum ada soal.</p><a href="quiz.html" class="btn-retry btn-back">← Back</a></div>`;
+                document.getElementById('quizContainer').innerHTML=`<div class="quiz-empty"><p>No Lessons Available</p><a href="quiz.html" class="btn-retry btn-back">← Back</a></div>`;
                 return;
             }
-            currentQuestions=shuffle(filtered).map(q=>({...q, options:shuffle(q.options.map((o,i)=>({text:o,orig:i})))}));
-            ci=0; score=0; answered=false; render();
+            currentQuestions=shuffle(filtered).map(q=>{
+    const correctText = q.options[q.correct];
+    const shuffledOptions = shuffle(q.options.map((o,i)=>({text:o,orig:i})));
+    return {...q, options: shuffledOptions, correctText: correctText};
+});
+ci=0; score=0; answered=false; render();
         }
 
         function render(){
             const q=currentQuestions[ci];
-            document.getElementById('quizContainer').innerHTML=`<div class="quiz-question"><div class="q-number">Soal ${ci+1}/${currentQuestions.length} (Lesson ${q.lessonId})</div><div class="q-sentence">${q.sentence}</div><div class="quiz-options">${q.options.map((o,i)=>`<div class="quiz-option" onclick="select(${i},this)">${o.text}</div>`).join('')}</div></div>`;
+            document.getElementById('quizContainer').innerHTML=`<div class="quiz-question"><div class="q-number">Question ${ci+1}/${currentQuestions.length} (Lesson ${q.lessonId})</div><div class="q-sentence">${q.sentence}</div><div class="quiz-options">${q.options.map((o,i)=>`<div class="quiz-option" onclick="select(${i},this)">${o.text}</div>`).join('')}</div></div>`;
         }
 
         function select(index,el){
@@ -123,36 +137,36 @@
 
         function showResult(){
             const total=currentQuestions.length, p=Math.round((score/total)*100);
-            let sc='ok', m='💪 Terus berlatih!';
-            if(p===100){ sc='perfect'; m='🎉 Sempurna!'; } else if(p>=80){ sc='good'; m='👍 Bagus!'; }
+            let sc='ok', m='頑張って!';
+if(p===100){ sc='perfect'; m='🎉 完璧!'; } else if(p>=80){ sc='good'; m='👍 すごい!'; }
             let reviewBtn = '';
             if(wrongQuestions.length > 0) {
-                reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#e74c3c;">🔁 Review ${wrongQuestions.length}</button>`;
+                reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#e74c3c;">Review ${wrongQuestions.length}</button>`;
             }
             document.getElementById('quizContainer').innerHTML=`<div class="quiz-question" style="text-align:center;"><h2>${m}</h2><div class="quiz-score ${sc}">${score}/${total}</div><p>${p}% benar</p>
             <button class="btn-retry" onclick="startQuiz()">Coba Lagi</button>
             ${reviewBtn}
-            <a href="quiz.html" class="btn-retry btn-back">📋 Semua Kuis</a></div>`;
+            <a href="quiz.html" class="btn-retry btn-back">All Quizzes</a></div>`;
         }
 
         function reviewWrong() {
     if(wrongQuestions.length === 0) return;
-    let html = `<div class="quiz-header"><h2>📝 Review</h2><p>${wrongQuestions.length} soal</p></div>`;
+    let html = `<div class="quiz-header"><h2>Review</h2><p>${wrongQuestions.length} Questions</p></div>`;
     
     wrongQuestions.forEach((q, i) => {
         html += `
         <div class="quiz-question">
-            <div class="q-number">Soal ${i+1}</div>
+            <div class="q-number">Question ${i+1}</div>
             <div class="q-sentence">${q.sentence}</div>
             <div style="margin-top:0.8rem;">
-                <p>❌ Jawaban kamu: <strong style="color:#e74c3c;">${q.userAnswer}</strong></p>
-                <p>✅ Jawaban benar: <strong style="color:#27ae60;">${q.correctText}</strong></p>
+                <p><img src="../img/wrong-icon.png" style="width:20px;vertical-align:middle;"> Your Answer: <strong style="color:#e74c3c;">${q.userAnswer}</strong></p>
+<p><img src="../img/correct-icon.png" style="width:20px;vertical-align:middle;"> Correct Answer: <strong style="color:#27ae60;">${q.correctText}</strong></p>
             </div>
         </div>`;
     });
     
-    html += `<button class="btn-retry" onclick="startQuiz()">🔄 Kuis Baru</button>
-             <a href="quiz.html" class="btn-retry btn-back">📋 Semua Kuis</a>`;
+    html += `<button class="btn-retry" onclick="startQuiz()">New Quiz</button>
+             <a href="quiz.html" class="btn-retry btn-back">All Quizzes</a>`;
     
     document.getElementById('quizContainer').innerHTML = html;
 }

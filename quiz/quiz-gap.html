@@ -279,7 +279,7 @@ function startQuiz(){
             const lessonId=getParam('lesson');
             if(!lessonId){ showGrid(); return; }
             if(!allGapData[lessonId]){
-                document.getElementById('gapContainer').innerHTML=`<div class="gap-empty"><p>📝 Belum ada soal.</p><a href="quiz-gap.html" class="btn-retry btn-back">← Back</a></div>`;
+                document.getElementById('gapContainer').innerHTML=`<div class="gap-empty"><p>No questions available.</p><a href="quiz-gap.html" class="btn-retry btn-back">← Back</a></div>`;
                 return;
             }
             gapData=allGapData[lessonId];
@@ -294,13 +294,15 @@ function render(){
     const opts=[...q.options].sort(()=>Math.random()-0.5).map(o=>`<span class="gap-option" onclick="fillBlank(this,'${o}')">${o}</span>`).join('');
     document.getElementById('gapContainer').innerHTML=`
     <div class="gap-card">
-        <div class="gap-number">Soal ${ci+1}/${gapData.length}</div>
+        <div class="gap-number">Question ${ci+1}/${gapData.length}</div>
         <div class="gap-sentence">${sHTML}</div>
         <div class="gap-options">${opts}</div>
         <div class="gap-result" id="result"></div>
-        <button class="btn-retry" style="background:#F3AD16;margin-top:0.5rem;color:#1a1a1a;" onclick="skipQuestion()">
-    <i class="fa-solid fa-forward"></i> 
-</button>
+        <div style="text-align:center;">
+    <button class="btn-retry" style="background:#F3AD16;margin-top:0.5rem;color:#1a1a1a;padding:0.3rem 0.8rem;width:auto;display:inline-block;" onclick="skipQuestion()">
+        <img src="../img/skip.svg" style="width:20px;height:20px;">
+    </button>
+</div>
     </div>`;
 }
 
@@ -377,7 +379,7 @@ function showResult(){
     const p=Math.round((score/totalBlanks)*100), m=p===100?'🎉 Sempurna!':p>=80?'👍 Bagus!':'💪 Terus berlatih!';
     let reviewBtn = '';
     if(wrongList.length > 0) {
-        reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#FAFFA4; color: #000000;">🔁 Review ${wrongList.length}</button>`;
+        reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#FAFFA4; color: #000000;"> Review ${wrongList.length}</button>`;
     }
     
     let actionBtn = '';
@@ -386,7 +388,7 @@ function showResult(){
         if(allGapData[nextId]) {
             actionBtn = `<a href="quiz-gap.html?lesson=${nextId}" class="btn-retry" style="background:#27ae60;">Next Lesson →</a>`;
         } else {
-            actionBtn = `<a href="quiz-gap.html" class="btn-retry" style="background:#27ae60;">📋 Semua Kuis</a>`;
+            actionBtn = `<a href="quiz-gap.html" class="btn-retry" style="background:#27ae60;">All Quizzes</a>`;
         }
     } else {
         actionBtn = `<button class="btn-retry" onclick="startQuiz()">Coba Lagi</button>`;
@@ -395,13 +397,13 @@ function showResult(){
     document.getElementById('gapContainer').innerHTML=`<div class="gap-card" style="text-align:center;"><h2>${m}</h2><div style="font-size:2rem;font-weight:bold;color:#27ae60;padding:1rem;">${score}/${totalBlanks}</div><p>${p}% benar</p>
     ${actionBtn}
     ${reviewBtn}
-    <a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a></div>`;
+    <a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">All Quizzes</a></div>`;
 }
 
 function reviewWrong() {
     console.log('Wrong list length:', wrongList.length);
 wrongList.forEach((q, i) => {
-    console.log(`Soal ${i+1}:`, q.userFilled, 'vs', q.answers);
+    console.log(`Question ${i+1}:`, q.userFilled, 'vs', q.answers);
 });
     if(wrongList.length === 0) return;
     
@@ -409,9 +411,9 @@ wrongList.forEach((q, i) => {
     const nextLessonId = parseInt(lessonId) + 1;
     const nextLink = allGapData[nextLessonId] 
         ? `<a href="quiz-gap.html?lesson=${nextLessonId}" class="btn-retry">Next Lesson →</a>`
-        : `<a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a>`;
+        : `<a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">All Quizzes</a>`;
     
-    let html = `<div class="quiz-header"><h2>📝 Review</h2><p>${wrongList.length} soal</p></div>`;
+    let html = `<div class="quiz-header"><h2>Review</h2><p>${wrongList.length} Question</p></div>`;
     
     wrongList.forEach((q, i) => {
         let userSentence = q.sentence;
@@ -424,11 +426,11 @@ wrongList.forEach((q, i) => {
         });
         
         html += `<div class="gap-card">
-            <div class="q-number">Soal ${i+1}</div>
+            <div class="q-number">Question ${i+1}</div>
             <div class="gap-sentence" style="line-height:2.5;">
-                <p><img src="../img/wrong-icon.png" style="width:24px;vertical-align:middle;"> <strong>Jawaban kamu:</strong></p>
+                <p><img src="../img/wrong-icon.png" style="width:24px;vertical-align:middle;"> <strong>Your Answer:</strong></p>
                 <p>${userSentence}</p>
-                <p><img src="../img/correct-icon.png" style="width:24px;vertical-align:middle;"> <strong>Jawaban benar:</strong></p>
+                <p><img src="../img/correct-icon.png" style="width:24px;vertical-align:middle;"> <strong>Correct Answer:</strong></p>
                 <p>${correctSentence}</p>
             </div>
         </div>`;
@@ -436,8 +438,8 @@ wrongList.forEach((q, i) => {
     
     html += `<div style="text-align:center;">
     ${nextLink}
-    <button class="btn-retry" onclick="retryWrong()" style="background:#78909C; margin-top:0.5rem;">🔄 Coba Lagi (${wrongList.length} Soal)</button>
-    <a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">📋 Semua Kuis</a>
+    <button class="btn-retry" onclick="retryWrong()" style="background:#78909C; margin-top:0.5rem;">Try Again (${wrongList.length} Question)</button>
+    <a href="quiz-gap.html" class="btn-retry" style="background:#95a5a6;">All Quizzes</a>
 </div>`;
     
     document.getElementById('gapContainer').innerHTML = html;

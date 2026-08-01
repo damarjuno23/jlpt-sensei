@@ -336,8 +336,8 @@ function addQuizButton() {
     const quizBtn = document.createElement('a');
     quizBtn.href = `../quiz/select.html?lesson=${lessonId}`;
     quizBtn.className = 'nav-button';
-    quizBtn.innerHTML = '<i class="fa-solid fa-puzzle-piece"></i> Quiz';
-    quizBtn.style.background = '#e74c3c';
+    quizBtn.innerHTML = '<img src="../img/df-1.png" style="width:20px;height:20px;vertical-align:middle;margin-right:4px;">';
+    quizBtn.style.background = '#6B8BA2';
     
     const nextBtn = nav.querySelector('a:last-child');
     nav.insertBefore(quizBtn, nextBtn);
@@ -376,13 +376,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Sidebar
+    const path = window.location.pathname;
+    const match = path.match(/lessons\/(\d+)\.html/);
+    if (match) {
+        generateSidebar(parseInt(match[1]));
+    } else if (path.includes('index.html') || path.endsWith('/N3/') || path.endsWith('/')) {
+        generateSidebar(null);
+    }
+    
+    // Quiz button
     addQuizButton();
+    
+    // Next/Prev icons
     document.querySelectorAll('.nav-button').forEach(btn => {
         if (btn.textContent.includes('Next')) {
-            btn.innerHTML = '<i class="fa-solid fa-circle-chevron-right"></i>';
+            btn.innerHTML = '<img src="../img/next.svg" style="width:20px;height:20px;">';
         }
         if (btn.textContent.includes('Prev')) {
-            btn.innerHTML = '<i class="fa-solid fa-circle-chevron-left"></i>';
+            btn.innerHTML = '<img src="../img/prev.svg" style="width:20px;height:20px;">';
         }
     });
 });

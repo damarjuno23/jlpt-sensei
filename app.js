@@ -387,7 +387,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Quiz button
     addQuizButton();
+
+    document.querySelectorAll('.kana-text, .jp-text').forEach(el => {
+    el.innerHTML = el.innerHTML.replace(/(?<=[\u3040-\u30FF\u4E00-\u9FFF])\s+(?=[\u3040-\u30FF\u4E00-\u9FFF])/g, '');
+});
     
+document.querySelectorAll('.example-item').forEach(el => {
+    el.style.overflow = 'visible';
+});
     // Next/Prev icons
     document.querySelectorAll('.nav-button').forEach(btn => {
         if (btn.textContent.includes('Next')) {

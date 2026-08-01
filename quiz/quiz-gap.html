@@ -376,7 +376,7 @@ if (progress >= 100) {
 
 function showResult(){
     const lessonId = getParam('lesson');
-    const p=Math.round((score/totalBlanks)*100), m=p===100?'🎉 Sempurna!':p>=80?'👍 Bagus!':'💪 Terus berlatih!';
+    const p=Math.round((score/totalBlanks)*100), m=p===100?'完璧!':p>=80?'すごい!':'頑張って!';
     let reviewBtn = '';
     if(wrongList.length > 0) {
         reviewBtn = `<button class="btn-retry" onclick="reviewWrong()" style="background:#FAFFA4; color: #000000;"> Review ${wrongList.length}</button>`;

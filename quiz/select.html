@@ -55,19 +55,11 @@ body {
     background: #7D929E;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../img/jolly.avif');
-    background-size: 600px;
-    background-position: center 70%;
-    background-repeat: no-repeat;
-    z-index: -1;
-    transform-origin: center 90%;
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
 }
 
 /* Mobile - card berjejer ke bawah */
@@ -109,7 +101,7 @@ body::before {
 </head>
 <body>
     <div class="main-content">
-        <header class="top-bar"><h1>Pilih Tipe Kuis</h1></header>
+        <header class="top-bar"><h1>Choose Quiz Type</h1></header>
         <div class="content">
             <div class="select-container" id="selectContainer"></div>
         </div>

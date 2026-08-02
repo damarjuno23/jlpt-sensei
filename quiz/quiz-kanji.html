@@ -12,14 +12,17 @@
     />
     <style>
       .kanji-container {
-        max-width: 700px;
+        max-width: 750px;
         margin: 0 auto;
         padding: 0 1rem;
       }
       .content {
         padding-top: 8rem;
       }
+      
       .top-bar {
+        background: #6f8c9c !important;
+        border-bottom: 1px solid #ffffff;
         width: 100%;
         margin: 0;
         padding: 1rem 2rem;
@@ -77,7 +80,7 @@
         cursor: pointer;
         background: #dee5c0;
         color: black;
-        font-size: 1rem;
+        font-size: 0.9rem;
         text-align: center;
         box-shadow:
           0 3px 0 #dee5c0,
@@ -231,26 +234,24 @@
         box-shadow: 0 4px 0 #37474f;
       }
 
-      .top-bar {
-        background: #6f8c9c !important;
-        border-bottom: 1px solid #ffffff;
-      }
+      
 
-      .progress-track {
+      /* .progress-track {
         max-width: 700px;
         height: 16px;
         margin: 2rem auto 1rem;
         background: rgba(255, 255, 255, 0.3);
         border-radius: 10px;
         border: 1px solid #78909c;
-      }
-      .progress-bar {
+        display: none;
+      } */
+      /* .progress-bar {
         height: 100%;
         background: #74c365;
         border-radius: 10px;
         transition: width 0.5s ease;
         width: 0%;
-      }
+      } */
     </style>
     <script src="../app.js"></script>
   </head>
@@ -264,10 +265,10 @@
         </h1>
       </header>
       <div class="content">
+        <div class="kanji-container" id="kanjiContainer"></div>
         <div class="progress-track">
           <div class="progress-bar" id="progressBar"></div>
         </div>
-        <div class="kanji-container" id="kanjiContainer"></div>
       </div>
     </div>
     <script src="quiz-kanji-data.js"></script>
@@ -319,8 +320,7 @@
       function showGrid() {
         const totalLessons = Math.ceil(kanjiData.length / 4);
         let html = `<div class="quiz-header"><h2>漢字 Quiz</h2>
-        <p>Pilih lesson untuk mulai kuis</p>
-        <a href="../index.html" class="btn-retry btn-back" style="display:inline-block;">← Home</a>
+        <p>Choose a lesson to start the quiz</p>
         </div><div class="quiz-grid">`;
         for (let i = 1; i <= totalLessons; i++) {
           html += `<a href="quiz-kanji.html?lesson=${i}" class="quiz-card">
@@ -333,11 +333,11 @@
       }
 
       function render() {
+        document.querySelector('.progress-track').style.display = 'block';
         const q = questions[ci];
         const originalIndex = kanjiData.findIndex((k) => k.word === q.word) + 1;
         answered = false;
 
-        // Acak options
         const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
 
         document.getElementById("kanjiContainer").innerHTML = `

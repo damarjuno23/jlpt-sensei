@@ -40,7 +40,6 @@ body {
 
 .gap-card {
     background: linear-gradient(180deg, #ffffff, #e8f0f8);
-    /* border: 3px solid #F6F1E7; */
     border: 3px solid #DCB4BC;
     border-radius: 12px;
     padding: 2rem;
@@ -50,6 +49,7 @@ body {
     0 8px 0 #583E46;
     position: relative;
     color: #583E46;
+    
 }
 /* Label di atas */
 .gap-card::before {
@@ -75,8 +75,8 @@ body {
 }
 /* Teks soal */
 .gap-sentence {
-    font-size: 1.3rem;
-    line-height: 1.4;
+    font-size: 1.1rem;
+    line-height: 1.2;
     padding: 1rem;
     background: #ffffff;
     border: 1px solid #78909C;
@@ -87,18 +87,21 @@ body {
 /* Gap slot */
 .gap-blank {
     display: inline-block;
-    min-width: 70px;
+    min-width: 60px;
     margin: 0 4px;
     text-align: center;
-    padding: 6px 14px;
+    padding: 4px 11px;
     color: #583E46;
     font-weight: 400;
+    font-size: 0.9rem;
     background: #81959e;
     border: 1px dashed #583E46;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
+
+
 
 .gap-blank.filled {
     background: #FFE772;
@@ -126,13 +129,13 @@ body {
     justify-content: center;
 }
 .gap-option {
-    padding: 12px 24px;
+    padding: 6px 16px;
     border: 1px solid #583E46;
     border-radius: 10px;
     cursor: pointer;
     background: #DEE5C0;
     color: black;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 400;
     box-shadow: 
     0 4px 0 #DEE5C0,
@@ -202,47 +205,32 @@ body {
     
 }
 
-/* Track karakter */
-.stairs-track {
+.sogeking-track {
+    display: flex;
+    align-items: center;
     max-width: 750px;
-    height: 80px;
-    position: relative;
-    margin: 4rem auto 1rem;
-    background: rgba(255,255,255,0.3);
-    border-radius: 10px;
-    border: 1px solid #78909C;
-    overflow: visible;
+    margin: 2rem auto;
+    gap: 0;
 }
-.progress-bar {
+.sogeking-bar-bg {
+    flex: 1;
+    height: 12px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 6px;
+    margin: 0 8px;
+}
+.sogeking-bar-fill {
     height: 100%;
     background: #74C365;
-    border-radius: 10px;
-    transition: width 0.5s ease;
+    border-radius: 6px;
     width: 0%;
+    transition: width 0.5s ease;
 }
-.character-runner {
-    position: absolute;
-    left: 0;
-    top: -50px;
-    font-size: 3rem;
-    transition: left 0.8s ease;
-    transform: translateX(-50%);
+.sogeking-track canvas {
+    width: 100px;
+    height: auto;
+    flex-shrink: 0;
 }
-.door-icon {
-    position: absolute;
-    right: -10px;
-    top: -55px;
-    font-size: 3.5rem;
-}
-.track-label {
-    position: absolute;
-    top: -25px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    color: #583E46;
-}
-.track-label.start { left: 0; }
-.track-label.finish { right: 0; }
 
 
     </style>
@@ -253,8 +241,19 @@ body {
     <header class="top-bar"><h1><a href="../index.html" style="color:white; text-decoration:none;">Gap Fill Quiz</a></h1></header>
     <div class="content">
         <div class="gap-container" id="gapContainer"></div>
+        
+        <div class="sogeking-track">
+    <div style="overflow:hidden; width:50px;">
+    <canvas id="sogekingCanvas"></canvas>
+</div>
+    <div class="sogeking-bar-bg">
+        <div class="sogeking-bar-fill" id="sogekingBar"></div>
     </div>
 </div>
+    </div>
+</div>
+
+
     <script src="quiz-gap-data.js"></script>
     <script>
         let gapData=[], ci=0, score=0, totalBlanks=0, filled=[], usedOptions=[];
@@ -365,13 +364,11 @@ function autoCheck(){
     rd.className='gap-result '+(cc===q.answers.length?'correct':'wrong');
     setTimeout(()=>{ ci++; ci<gapData.length?render():showResult(); },2300);
 
-    const progress = (ci + 1) / gapData.length * 100;
-document.querySelector('.progress-bar').style.width = progress + '%';
-document.querySelector('.character-runner').style.left = `calc(${progress}% - 20px)`;
-
-if (progress >= 100) {
-    document.getElementById('finalDoor').innerHTML = '<span>✨🚪✨</span>';
-}
+    const progress = (ci + 1) / gapData.length;
+// Stop animasi, set frame sesuai progress
+sogekingFrame = Math.floor(progress * (TOTAL_FRAMES - 1));
+drawSogeking();
+document.getElementById('sogekingBar').style.width = (progress * 100) + '%';
 }
 
 function showResult(){
@@ -477,8 +474,48 @@ function skipQuestion() {
 }
 
 
+// Sogeking Slingshot Animation + Progress
+const sogekingCanvas = document.getElementById('sogekingCanvas');
+const sogekingCtx = sogekingCanvas.getContext('2d');
+sogekingCtx.imageSmoothingEnabled = false;
+const spriteSogeking = new Image();
+spriteSogeking.src = '../img/sling.png';
+const TOTAL_FRAMES = 8;
+let sogekingFrame = 0;
+let sogekingFPS = 1;
+let sogekingLastTime = 0;
+let sogekingLoaded = false;
 
+spriteSogeking.onload = () => {
+    sogekingLoaded = true;
+    const fw = spriteSogeking.width / TOTAL_FRAMES;
+    const fh = spriteSogeking.height;
+    const scale = 60 / fw;
+    sogekingCanvas.width = fw;
+    sogekingCanvas.height = fh;
+    sogekingCanvas.style.width = '60px';
+    sogekingCanvas.style.height = (fh * scale) + 'px';
+    sogekingCanvas.style.marginTop = '20px';
+    sogekingCanvas.style.marginLeft = '-10px';
+    requestAnimationFrame(sogekingLoop);
+};
 
+function sogekingLoop(timestamp) {
+    if (!sogekingLoaded) return;
+    if (timestamp - sogekingLastTime > 1000 / sogekingFPS) {
+        sogekingFrame = (sogekingFrame + 1) % TOTAL_FRAMES;
+        drawSogeking();
+        sogekingLastTime = timestamp;
+    }
+    requestAnimationFrame(sogekingLoop);
+}
+
+function drawSogeking() {
+    const fw = spriteSogeking.width / TOTAL_FRAMES;
+    const fh = spriteSogeking.height;
+    sogekingCanvas.width = sogekingCanvas.width; // reset total
+    sogekingCtx.drawImage(spriteSogeking, sogekingFrame * fw, 0, fw, fh, 0, 0, fw, fh);
+}
 // Den Den Mushi random sound
 const dendenSound = new Audio('../audio/denden.mp3');
 dendenSound.volume = 0.25;

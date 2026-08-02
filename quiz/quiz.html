@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <style>
         .quiz-container { 
-    max-width: 700px; 
+    max-width: 750px; 
     margin: 10rem auto auto; 
+    max-height: 80vh;
+    overflow-y: auto;
 }
         .quiz-question { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .q-number { font-weight: bold; color: #2c3e50; margin-bottom: 0.8rem; }
-        .q-sentence { font-size: 1.3rem; margin-bottom: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; line-height: 1.8; }
+        .q-sentence { font-size: 1.1rem; margin-bottom: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; line-height: 1.6; }
         .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-        .quiz-option { padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; text-align: center; font-size: 1.1rem; transition: all 0.2s; }
+        .quiz-option { padding: 0.6rem; border: 2px solid #ddd; border-radius: 8px; font-size: 0.9rem;cursor: pointer; text-align: center; font-size: 1.1rem; transition: all 0.2s; }
         .quiz-option:hover { border-color: #3498db; background: #f0f7ff; }
         .quiz-option.correct { border-color: #27ae60; background: #d5f5e3; pointer-events: none; }
         .quiz-option.wrong { border-color: #e74c3c; background: #fadbd8; pointer-events: none; }
@@ -40,6 +42,60 @@
     text-align: center;
     margin: 1rem auto;
     width: fit-content;
+    
+}
+
+body {
+    overflow: hidden;
+    height: 100vh;
+}
+
+.quiz-grid-page {
+    margin: 2rem auto !important;
+    padding-bottom: 6rem !important;
+}
+
+.quiz-active-page .quiz-container {
+    margin: 10rem auto auto;
+}
+
+@media (max-width: 768px) {
+    .quiz-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 0.4rem;
+    }
+    
+    .quiz-card {
+        padding: 0.5rem;
+    }
+    
+    .quiz-card .qc-num {
+        font-size: 0.65rem;
+    }
+    
+    .quiz-card .qc-title {
+        font-size: 0.7rem;
+    }
+    .quiz-question {
+        padding: 0.5rem;
+        padding-bottom: 4rem;
+    }
+
+    quiz-question .q-sentence {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+    .quiz-question p {
+        font-size: 0.8rem;
+        margin: 0.2rem 0;
+    }
+    .quiz-question img {
+        width: 16px !important;
+    }
+
+    .quiz-container {
+    padding-bottom: 5rem;
+}
 }
     </style>
     <script src="../app.js"></script>
@@ -60,40 +116,59 @@
             const totalLessons=Object.keys(allMCData).length;
             let html=`<div class="quiz-header"><h2>Multiple Choice Quiz</h2>
                 <a href="quiz.html?random=5" class="btn-random">Random 5 Question</a>
-                <a href="../index.html" class="btn-retry btn-back" style="display:inline-block;">← Home</a>
                 </div><div class="quiz-grid">`;
             for(let i=1;i<=totalLessons;i++){
                 if(allMCData[i]) html+=`<a href="quiz.html?random=5" class="quiz-card"><div class="qc-num">#${i}</div><div class="qc-title">Quiz ${i}</div></a>`;
             }
             html+=`</div>`;
             document.getElementById('quizContainer').innerHTML=html;
+            document.getElementById('quizContainer').style.paddingBottom = '6rem';
+            document.querySelector('.quiz-container').classList.add('quiz-grid-page');
+            document.querySelector('.quiz-container').classList.remove('quiz-active-page');
         }
 
         function startQuiz(){
-            wrongQuestions = [];
-            const random=getParam('random');
-            if(!random){ showGrid(); return; }
-            let filtered=[];
-            for(let k in allMCData){ 
-                const items = allMCData[k];
-                if(Array.isArray(items)){
-                    items.forEach(q => {
-                        filtered.push({...q, lessonId: parseInt(k)});
-                    });
-                }
-            }
-            filtered=shuffle(filtered).slice(0,parseInt(random));
-            if(filtered.length===0){
-                document.getElementById('quizContainer').innerHTML=`<div class="quiz-empty"><p>No Lessons Available</p><a href="quiz.html" class="btn-retry btn-back">← Back</a></div>`;
-                return;
-            }
-            currentQuestions=shuffle(filtered).map(q=>{
-    const correctText = q.options[q.correct];
-    const shuffledOptions = shuffle(q.options.map((o,i)=>({text:o,orig:i})));
-    return {...q, options: shuffledOptions, correctText: correctText};
-});
-ci=0; score=0; answered=false; render();
+    if (sessionStorage.getItem('reviewView') === 'true') {
+        wrongQuestions = JSON.parse(sessionStorage.getItem('reviewData'));
+        reviewWrong();
+        return;
+    }
+    
+    wrongQuestions = [];
+    const random = getParam('random');
+    if (!random) { showGrid(); return; }
+    
+    let filtered = [];
+    for (let k in allMCData) { 
+        const items = allMCData[k];
+        if (Array.isArray(items)) {
+            items.forEach(q => {
+                filtered.push({...q, lessonId: parseInt(k)});
+            });
         }
+    }
+    
+    filtered = shuffle(filtered).slice(0, parseInt(random));
+    
+    if (filtered.length === 0) {
+        document.getElementById('quizContainer').innerHTML = `<div class="quiz-empty"><p>No Lessons Available</p><a href="quiz.html" class="btn-retry btn-back">← Back</a></div>`;
+        return;
+    }
+    
+    currentQuestions = shuffle(filtered).map(q => {
+        const correctText = q.options[q.correct];
+        const shuffledOptions = shuffle(q.options.map((o, i) => ({ text: o, orig: i })));
+        return { ...q, options: shuffledOptions, correctText: correctText };
+    });
+    
+    ci = 0;
+    score = 0;
+    answered = false;
+    render();
+
+    document.querySelector('.quiz-container').classList.add('quiz-active-page');
+    document.querySelector('.quiz-container').classList.remove('quiz-grid-page');
+}
 
         function render(){
             const q=currentQuestions[ci];
@@ -121,7 +196,7 @@ ci=0; score=0; answered=false; render();
         wrongQuestions.push({
     sentence: q.sentence,
     options: q.options.map(o => o.text),
-    correctText: q.options[q.correct].text,
+    correctText: q.correctText,
     userAnswer: q.options[index].text
 });
         // Audio wrong
@@ -146,12 +221,15 @@ if(p===100){ sc='perfect'; m='🎉 完璧!'; } else if(p>=80){ sc='good'; m='�
             document.getElementById('quizContainer').innerHTML=`<div class="quiz-question" style="text-align:center;"><h2>${m}</h2><div class="quiz-score ${sc}">${score}/${total}</div><p>${p}% benar</p>
             <button class="btn-retry" onclick="startQuiz()">Coba Lagi</button>
             ${reviewBtn}
-            <a href="quiz.html" class="btn-retry btn-back">All Quizzes</a></div>`;
+            <a href="quiz.html" class="btn-retry btn-back" onclick="sessionStorage.removeItem('reviewView');sessionStorage.removeItem('reviewData')">All Quizzes</a>`;
         }
 
         function reviewWrong() {
-    if(wrongQuestions.length === 0) return;
-    let html = `<div class="quiz-header"><h2>Review</h2><p>${wrongQuestions.length} Questions</p></div>`;
+    sessionStorage.setItem('reviewData', JSON.stringify(wrongQuestions));
+    sessionStorage.setItem('reviewView', 'true');
+    
+    if (wrongQuestions.length === 0) return;
+    let html = `<div class="quiz-header" style="margin-top:-6rem;"><h2>Review</h2><p>${wrongQuestions.length} Questions</p></div>`;
     
     wrongQuestions.forEach((q, i) => {
         html += `
@@ -160,13 +238,13 @@ if(p===100){ sc='perfect'; m='🎉 完璧!'; } else if(p>=80){ sc='good'; m='�
             <div class="q-sentence">${q.sentence}</div>
             <div style="margin-top:0.8rem;">
                 <p><img src="../img/wrong-icon.png" style="width:20px;vertical-align:middle;"> Your Answer: <strong style="color:#e74c3c;">${q.userAnswer}</strong></p>
-<p><img src="../img/correct-icon.png" style="width:20px;vertical-align:middle;"> Correct Answer: <strong style="color:#27ae60;">${q.correctText}</strong></p>
+                <p><img src="../img/correct-icon.png" style="width:20px;vertical-align:middle;"> Correct Answer: <strong style="color:#27ae60;">${q.correctText}</strong></p>
             </div>
         </div>`;
     });
     
-    html += `<button class="btn-retry" onclick="startQuiz()">New Quiz</button>
-             <a href="quiz.html" class="btn-retry btn-back">All Quizzes</a>`;
+    html += `<button class="btn-retry" onclick="sessionStorage.removeItem('reviewView');sessionStorage.removeItem('reviewData');startQuiz()">New Quiz</button>
+             <a href="quiz.html" class="btn-retry btn-back" onclick="sessionStorage.removeItem('reviewView');sessionStorage.removeItem('reviewData')">All Quizzes</a>`;
     
     document.getElementById('quizContainer').innerHTML = html;
 }
